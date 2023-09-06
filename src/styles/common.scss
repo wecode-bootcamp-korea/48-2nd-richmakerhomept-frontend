@@ -1,5 +1,23 @@
 * {
   box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a49696;
+}
+
+body {
+  width: 390px;
+  min-height: 844px;
+  border-radius: 20px;
+  padding: 20px 0 0;
+  background-color: #fff;
 }
 
 a {
