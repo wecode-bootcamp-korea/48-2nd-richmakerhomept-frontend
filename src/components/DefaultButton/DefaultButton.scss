@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.defaultButton {
+  width: 90%;
+  height: 60px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  background-color: $purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+}

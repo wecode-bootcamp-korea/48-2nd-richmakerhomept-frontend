@@ -21,6 +21,7 @@ body {
   background-color: #fff;
   overflow-y: scroll;
   display: flex;
+  position: relative;
 }
 
 #root::-webkit-scrollbar {
