@@ -1,8 +1,12 @@
 import React from 'react';
 import './DefaultButton.scss';
 
-const DefaultButton = () => {
-  return <button className="defaultButton">시작하기</button>;
+const DefaultButton = ({ text, onClick }) => {
+  return (
+    <button className="defaultButton" onClick={onClick}>
+      {text}
+    </button>
+  );
 };
 
 export default DefaultButton;
