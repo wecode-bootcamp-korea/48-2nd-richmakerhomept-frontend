@@ -15,6 +15,7 @@
     .arrowBack {
       position: absolute;
       left: 0;
+      cursor: pointer;
     }
 
     .title {
@@ -33,6 +34,14 @@
       background-color: transparent;
       font-size: 14px;
       cursor: pointer;
+
+      &:hover {
+        font-weight: bold;
+      }
+
+      &.bold {
+        font-weight: bold;
+      }
     }
 
     .divider {
