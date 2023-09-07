@@ -37,18 +37,17 @@
       width: 7px;
     }
     &::-webkit-scrollbar-thumb:hover {
-      background-color: $purple; /* 스크롤바 위로 마우스를 올렸을 때 색상 변경 */
+      background-color: $purple;
       border-radius: 5px;
       margin: 5px;
     }
 
-    /* 수평 스크롤바 스타일 (Chrome, Safari) */
     &::-webkit-scrollbar-track {
-      background-color: transparent; /* 스크롤바 트랙의 배경색 설정 */
+      background-color: transparent;
     }
 
     &::-webkit-scrollbar-track:hover {
-      background-color: transparent; /* 스크롤바 트랙 위로 마우스를 올렸을 때 색상 변경 */
+      background-color: transparent;
     }
 
     .calendarModalItem {
