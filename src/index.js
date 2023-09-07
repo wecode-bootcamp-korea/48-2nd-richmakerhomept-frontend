@@ -13,5 +13,5 @@ root.render(
   <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen={true} />
     <Router />
-  </QueryClientProvider>
+  </QueryClientProvider>,
 );

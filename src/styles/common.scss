@@ -3,7 +3,7 @@
   font-family: 'Nunito', sans-serif;
 }
 
-html {
+body {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -12,12 +12,19 @@ html {
   background-color: #a49696;
 }
 
-body {
+#root {
   width: 390px;
-  min-height: 844px;
+  max-height: 80vh;
+  min-height: 80vh;
   border-radius: 20px;
   padding: 20px 0 0;
   background-color: #fff;
+  overflow-y: scroll;
+  display: flex;
+}
+
+#root::-webkit-scrollbar {
+  display: none;
 }
 
 a {
