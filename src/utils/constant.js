@@ -5,9 +5,15 @@ import {
   LiaEllipsisHSolid,
 } from 'react-icons/lia';
 
-/** password validation */
+/** Phone number pattern for validation */
+export const phoneNumberPattern = /^[0-9]{11}$/;
+
+/** password pattern for validation */
 export const passwordPattern =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{10,}/;
+
+/** korean pattern for validation */
+export const koreanPattern = /^[가-힣]{2,}$/;
 
 /** Buttons objects in "Array" for Navigation bar */
 export const NAVIGATION_BUTTONS = [
