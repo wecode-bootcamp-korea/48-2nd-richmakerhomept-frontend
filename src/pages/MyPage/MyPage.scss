@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .myPageContainer {
   max-width: 90%;
   width: 100%;
@@ -11,6 +13,8 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $grey22;
 
     .arrowBack {
       position: absolute;

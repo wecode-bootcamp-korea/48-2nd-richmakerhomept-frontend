@@ -1,9 +1,9 @@
 import React from 'react';
 import './DefaultButton.scss';
 
-const DefaultButton = ({ text, onClick }) => {
+const DefaultButton = ({ text, onClick, disabled }) => {
   return (
-    <button className="defaultButton" onClick={onClick}>
+    <button className="defaultButton" onClick={onClick} disabled={disabled}>
       {text}
     </button>
   );

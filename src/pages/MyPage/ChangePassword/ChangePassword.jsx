@@ -62,7 +62,7 @@ const ChangePassword = () => {
         {newPasswordCheck !== '' && !isSameNewPassword && (
           <p className="passwordCheck">비밀번호가 다릅니다.</p>
         )}
-        <DefaultButton text="저장" disabled={isValid ? false : true} />
+        <DefaultButton text="저장" disabled={!isValid} />
       </form>
     </div>
   );
