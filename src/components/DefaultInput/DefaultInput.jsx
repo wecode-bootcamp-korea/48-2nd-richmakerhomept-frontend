@@ -1,15 +1,17 @@
 import React from 'react';
 import './DefaultInput.scss';
 
-const DefaultInput = ({ icon, type, onClick, placeholder }) => {
+const DefaultInput = ({ icon, type, id, onChange, placeholder, value }) => {
   return (
     <div className="inputContainer">
       {icon}
       <input
-        type={type}
         className="defaultInput"
-        onClick={onClick}
+        type={type}
         placeholder={placeholder}
+        id={id}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
