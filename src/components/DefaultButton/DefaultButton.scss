@@ -13,7 +13,16 @@
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
+
   &:hover {
     opacity: 0.9;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    color: #888;
+    opacity: 1;
+    user-select: none;
+    cursor: default;
   }
 }
