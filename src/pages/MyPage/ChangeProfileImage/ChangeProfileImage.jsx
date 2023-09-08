@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { AiOutlineUser } from 'react-icons/ai';
 import { MdModeEditOutline } from 'react-icons/md';
@@ -10,51 +9,43 @@ import './ChangeProfileImage.scss';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
-const saveFileImage = async file => {
-  try {
-    const formData = new FormData();
-    formData.append('image', file);
-
-    const response = await axios.post(baseUrl, formData);
-    return response.data;
-  } catch (error) {
-    throw new Error('이미지 업로드 실패');
-  }
-};
-
 const ChangeProfileImage = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const [file, setFile] = useState();
 
-  const { mutate } = useMutation(saveFileImage, {
-    onSuccess: data => {
-      queryClient.invalidateQueries('profileImage');
-    },
-  });
-
-  const handleFileUpload = e => {
+  const onChangeImageInput = async e => {
+    e.preventDefault();
     const { files } = e.target;
+    const formData = new FormData();
 
-    if (files && files[0]) {
-      mutate(files[0]);
+    if (files) {
+      formData.append('profileImage', files[0]);
+      setFile(files[0]);
     }
   };
 
-  const { isLoading, data } = useQuery(['profileImage'], async () => {
-    const response = await axios.get('IMAGE_URL', config);
-    return response.data;
-  });
+  const onSubmitChange = async e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('image', file);
 
-  useEffect(() => {
-    if (!isLoading && data) {
-      const imageUrl = data.url;
+    await axios
+      .post(baseUrl, formData, config)
+      .then(result => console.log(result))
+      .catch(error => console.log(error));
+  };
 
-      const imageElement = document.querySelector('.profileImage');
-      if (imageElement) {
-        imageElement.src = imageUrl;
-      }
-    }
-  }, [isLoading, data]);
+  const handleSubmitImage = () => {
+    onSubmitChange();
+    navigate('/main');
+  };
+
+  // useEffect(() => {
+  //   axios
+  //     .get(baseUrl)
+  //     .then(result => console.log(result))
+  //     .catch(error => console.log(error));
+  // }, []);
 
   return (
     <>
@@ -68,12 +59,12 @@ const ChangeProfileImage = () => {
             name="file"
             accept="image/*"
             className="fileUp"
-            onChange={handleFileUpload}
+            onChange={onChangeImageInput}
           />
         </span>
       </div>
 
-      <DefaultButton text="저장" onClick={() => navigate('/main')} />
+      <DefaultButton text="저장" onClick={handleSubmitImage} />
     </>
   );
 };
