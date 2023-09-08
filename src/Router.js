@@ -11,6 +11,7 @@ import AddUser from './pages/AddUser/AddUser';
 import GroupManagement from './pages/GroupManagement/GroupManagement';
 import IncomeDetail from './pages/Main/pages/IncomeDetail/IncomeDetail';
 import SpendingDetail from './pages/Main/pages/SpendingDetail/SpendingDetail';
+import GroupUserList from './pages/GroupUserList/GroupUserList';
 
 const Router = () => {
   return (
@@ -50,6 +51,7 @@ const Router = () => {
         <Route path="/add-user" element={<AddUser />} />
         <Route path="/my-page" element={<MyPage />} />
         <Route path="/group" element={<GroupManagement />} />
+        <Route path="/group/group-user" element={<GroupUserList />} />
       </Routes>
     </BrowserRouter>
   );
