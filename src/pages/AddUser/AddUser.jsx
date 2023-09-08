@@ -3,6 +3,7 @@ import { GrGroup } from 'react-icons/gr';
 import DefaultButton from '../../components/DefaultButton/DefaultButton';
 import InviteModal from './components/InviteModal';
 import './AddUser.scss';
+import Navbar from '../../components/Navbar/Navbar';
 
 const AddUser = () => {
   const [isOpenStartGroupModal, setIsOpenStartGroupModal] = useState(false);
@@ -29,10 +30,13 @@ const AddUser = () => {
       </div>
       <DefaultButton text="공동관리 시작하기" onClick={handleOpenModal} />
       {isOpenStartGroupModal && (
-        <InviteModal
-          isOpenAddUserModal={isOpenStartGroupModal}
-          closeModal={closeModal}
-        />
+        <>
+          <InviteModal
+            isOpenAddUserModal={isOpenStartGroupModal}
+            closeModal={closeModal}
+          />
+          <Navbar />
+        </>
       )}
     </div>
   );
