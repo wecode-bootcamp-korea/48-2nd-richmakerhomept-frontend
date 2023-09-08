@@ -8,7 +8,7 @@ import './GroupUserList.scss';
 const GroupUserList = () => {
   const navigate = useNavigate();
 
-  const { isLoading, data, isError } = useGetGroupUsers();
+  const { isLoading, data: userList, isError } = useGetGroupUsers();
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error...</div>;
@@ -24,7 +24,7 @@ const GroupUserList = () => {
         <h1 className="title">공동관리 설정</h1>
       </div>
       <div className="groupUserListContentContainer">
-        {data.map(el => (
+        {userList.map(el => (
           <GroupUser
             key={el.userId}
             profileImage={el.profileImage}
