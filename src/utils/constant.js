@@ -52,7 +52,7 @@ export const NAVIGATION_BUTTONS = [
   },
   {
     name: '공동관리',
-    path: '/main',
+    path: '/group',
     icon: <LiaUserFriendsSolid className="navIcons" />,
   },
   {

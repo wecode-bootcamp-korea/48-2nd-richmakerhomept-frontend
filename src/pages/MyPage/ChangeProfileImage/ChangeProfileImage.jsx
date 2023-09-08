@@ -28,8 +28,13 @@ const ChangeProfileImage = () => {
     const formData = new FormData();
     formData.append('image', file);
 
+    const headers = {
+      ...config.headers,
+      Authorization: localStorage.getItem('token'),
+    };
+
     await axios
-      .post(baseUrl, formData, config)
+      .post(baseUrl, formData, { headers })
       .then(result => console.log(result))
       .catch(error => console.log(error));
   };
@@ -39,12 +44,12 @@ const ChangeProfileImage = () => {
     navigate('/main');
   };
 
-  // useEffect(() => {
-  //   axios
-  //     .get(baseUrl)
-  //     .then(result => console.log(result))
-  //     .catch(error => console.log(error));
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(baseUrl)
+      .then(result => console.log(result))
+      .catch(error => console.log(error));
+  }, []);
 
   return (
     <>

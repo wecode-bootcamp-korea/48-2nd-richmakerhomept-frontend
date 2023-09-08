@@ -3,16 +3,22 @@ import Navbar from '../../../components/Navbar/Navbar';
 import InviteWithPhoneNumber from './InviteWithPhoneNumber';
 import './InviteModal.scss';
 
-const InviteModal = () => {
+const InviteModal = ({ isOpenAddUserModal, closeModal, hideNavbar }) => {
   return (
     <>
-      <div className="inviteModalBackGround">
-        <div className="inviteModal">
-          <p className="title">연결 방식</p>
-          <InviteWithPhoneNumber />
+      {isOpenAddUserModal ? (
+        <div
+          className="inviteModalBackGround"
+          onClick={closeModal}
+          isOpenAddUserModal={isOpenAddUserModal}
+        >
+          <div className="inviteModal" onClick={e => e.stopPropagation()}>
+            <p className="title">연결 방식</p>
+            <InviteWithPhoneNumber />
+          </div>
         </div>
-      </div>
-      <Navbar />
+      ) : null}
+      {!hideNavbar && <Navbar />}
     </>
   );
 };

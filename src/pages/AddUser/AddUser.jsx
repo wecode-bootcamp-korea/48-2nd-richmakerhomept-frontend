@@ -7,6 +7,10 @@ import './AddUser.scss';
 const AddUser = () => {
   const [isOpenStartGroupModal, setIsOpenStartGroupModal] = useState(false);
 
+  const closeModal = () => {
+    if (isOpenStartGroupModal === true) return setIsOpenStartGroupModal(false);
+  };
+
   const handleOpenModal = () => {
     setIsOpenStartGroupModal(true);
   };
@@ -24,7 +28,12 @@ const AddUser = () => {
         </p>
       </div>
       <DefaultButton text="공동관리 시작하기" onClick={handleOpenModal} />
-      {isOpenStartGroupModal && <InviteModal />}
+      {isOpenStartGroupModal && (
+        <InviteModal
+          isOpenAddUserModal={isOpenStartGroupModal}
+          closeModal={closeModal}
+        />
+      )}
     </div>
   );
 };
