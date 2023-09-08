@@ -5,8 +5,15 @@ import {
   LiaEllipsisHSolid,
 } from 'react-icons/lia';
 
-/** Email pattern for validation */
-export const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+/** Phone number pattern for validation */
+export const phoneNumberPattern = /^[0-9]{11}$/;
+
+/** password pattern for validation */
+export const passwordPattern =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{10,}/;
+
+/** korean pattern for validation */
+export const koreanPattern = /^[가-힣]{2,}$/;
 
 /** Buttons objects in "Array" for Navigation bar */
 export const NAVIGATION_BUTTONS = [
@@ -56,3 +63,8 @@ export const CALENDAR_MODAL_LIST = [
   { title: '2022년 2월' },
   { title: '2022년 1월' },
 ];
+
+/** FormData headers */
+export const config = {
+  headers: { 'Content-Type': 'multipart/form-data' },
+};
