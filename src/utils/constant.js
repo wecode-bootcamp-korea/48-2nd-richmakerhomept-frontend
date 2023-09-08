@@ -5,8 +5,9 @@ import {
   LiaEllipsisHSolid,
 } from 'react-icons/lia';
 
-/** Email pattern for validation */
-export const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+/** password validation */
+export const passwordPattern =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{10,}/;
 
 /** Buttons objects in "Array" for Navigation bar */
 export const NAVIGATION_BUTTONS = [
