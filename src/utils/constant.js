@@ -4,6 +4,7 @@ import {
   LiaUserFriendsSolid,
   LiaEllipsisHSolid,
 } from 'react-icons/lia';
+import { CiUser, CiLock } from 'react-icons/ci';
 
 /** Phone number pattern for validation */
 export const phoneNumberPattern = /^[0-9]{11}$/;
@@ -14,6 +15,28 @@ export const passwordPattern =
 
 /** korean pattern for validation */
 export const koreanPattern = /^[가-힣]{2,}$/;
+
+/** Input objects in "Array" for Join user info Inputs */
+export const JOIN_USER_INPUTS = [
+  {
+    id: 'userName',
+    icon: <CiUser className="inputIcon" />,
+    type: 'text',
+    placeholder: '이름',
+  },
+  {
+    id: 'password',
+    icon: <CiLock className="inputIcon" />,
+    type: 'password',
+    placeholder: '비밀번호',
+  },
+  {
+    id: 'passwordCheck',
+    icon: <CiLock className="inputIcon" />,
+    type: 'password',
+    placeholder: '비밀번호 확인',
+  },
+];
 
 /** Buttons objects in "Array" for Navigation bar */
 export const NAVIGATION_BUTTONS = [

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { CiUser } from 'react-icons/ci';
 import { phoneNumberPattern } from '../../../utils/constant';
@@ -25,31 +26,40 @@ const PhoneNumber = () => {
     setUserPhoneNumber(onlyNumber);
   };
 
+  const postPhoneNumber = async phoneNumber => {
+    const response = await axios.post(
+      `${baseUrl}/user/presignin`,
+      {
+        phoneNumber,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+      },
+    );
+
+    return response.data;
+  };
+
+  const mutation = useMutation(postPhoneNumber, {
+    onSuccess: data => {
+      console.log(data);
+      const message = data.message;
+      localStorage.setItem('userPhoneNumber', userPhoneNumber);
+      if (message === 'INVALID_USER') {
+        navigate('/join');
+      } else if (message === 'user is confirmed') {
+        navigate('/password');
+      }
+    },
+    onError: error => {
+      console.log(`ERROR : ${error}`);
+    },
+  });
+
   const handlePostPhoneNumber = () => {
-    axios
-      .post(
-        `${baseUrl}/user/presignin`,
-        {
-          phoneNumber: userPhoneNumber,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-        },
-      )
-      .then(response => {
-        const message = response.message;
-        localStorage.setItem('userPhoneNumber', userPhoneNumber);
-        if (message === 'INVALID_USER') {
-          navigate('/join');
-        } else if (message === 'user is confirmed') {
-          navigate('/password');
-        }
-      })
-      .catch(error => {
-        console.log(`ERROR : ${error}`);
-      });
+    mutation.mutate(userPhoneNumber);
   };
 
   return (
