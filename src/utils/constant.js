@@ -63,3 +63,8 @@ export const CALENDAR_MODAL_LIST = [
   { title: '2022년 2월' },
   { title: '2022년 1월' },
 ];
+
+/** FormData headers */
+export const config = {
+  headers: { 'Content-Type': 'multipart/form-data' },
+};
