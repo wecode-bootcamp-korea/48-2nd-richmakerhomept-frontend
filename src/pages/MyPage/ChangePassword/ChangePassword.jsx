@@ -7,7 +7,7 @@ import DefaultInput from '../../../components/DefaultInput/DefaultInput';
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './ChangePassword.scss';
 
-// 기존 비밀번호가 로그인된 유저의 비밀번호와 같아야 한다.
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const ChangePassword = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const ChangePassword = () => {
     navigate('/main');
 
     axios
-      .post('', { existingPassword, newPassword })
+      .post(baseUrl, { existingPassword, newPassword })
       .then(res => {
         if (res.message === 'inValid password')
           alert('기존 비밀번호를 확인해주세요');
