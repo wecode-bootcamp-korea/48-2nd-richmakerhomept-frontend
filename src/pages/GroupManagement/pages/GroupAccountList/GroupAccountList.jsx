@@ -18,6 +18,10 @@ const GroupAccountList = () => {
     setActiveTabIndex(id);
   };
 
+  const totalRest = accountList
+    ? accountList.reduce((sum, account) => sum + Number(account.price), 0)
+    : 0;
+
   return (
     <div className="groupAccountListContainer">
       <div className="accountListHeader">
@@ -46,7 +50,7 @@ const GroupAccountList = () => {
           <div className="header">
             <p>잔고 합계</p>
             <p>
-              <b className="price">20,000</b>원
+              <b className="price">{totalRest.toLocaleString()}</b>원
             </p>
           </div>
           <div className="accountItemContainer">
@@ -68,23 +72,6 @@ const GroupAccountList = () => {
                 />
               </div>
             ))}
-
-            {/* <div className="accountList">
-              <img
-                src="https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/lotteCard_PNG.png"
-                alt="카드"
-                className="account"
-              />
-              <div className="accountTitleBox">
-                <p>그린체크카드</p>
-                <span className="price">0원</span>
-              </div>
-              <img
-                src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M"
-                alt="프로필"
-                className="profile"
-              />
-            </div> */}
           </div>
         </div>
       </div>

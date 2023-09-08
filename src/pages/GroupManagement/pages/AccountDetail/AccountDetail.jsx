@@ -51,6 +51,18 @@ const AccountDetail = () => {
           </div>
           <p className="rest">1,144,638원</p>
         </div>
+
+        <div className="accountDetailContent">
+          <div className="header">
+            <p>23/09/14 12:15</p>
+            <p>체크카드결</p>
+          </div>
+          <div className="body">
+            <p>바나프레소 역삼대로</p>
+            <p>-3,300원</p>
+          </div>
+          <p className="rest">1,144,638원</p>
+        </div>
       </div>
     </div>
   );

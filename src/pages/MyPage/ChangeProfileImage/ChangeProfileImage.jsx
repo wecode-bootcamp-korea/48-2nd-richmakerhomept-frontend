@@ -4,6 +4,7 @@ import axios from 'axios';
 import { AiOutlineUser } from 'react-icons/ai';
 import { MdModeEditOutline } from 'react-icons/md';
 import { config } from '../../../utils/constant';
+import { useGetProfileImage } from '../../../hooks/api/useGetProfileImage';
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './ChangeProfileImage.scss';
 
