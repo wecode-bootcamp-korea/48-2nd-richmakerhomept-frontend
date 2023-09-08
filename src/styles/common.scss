@@ -13,6 +13,7 @@ body {
 }
 
 #root {
+  position: relative;
   width: 390px;
   max-height: 80vh;
   min-height: 80vh;
@@ -21,7 +22,6 @@ body {
   background-color: #fff;
   overflow-y: scroll;
   display: flex;
-  position: relative;
 }
 
 #root::-webkit-scrollbar {

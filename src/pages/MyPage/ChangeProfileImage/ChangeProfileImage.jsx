@@ -1,6 +1,7 @@
 import React from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { MdModeEditOutline } from 'react-icons/md';
+<<<<<<< HEAD
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './ChangeProfileImage.scss';
 
@@ -11,6 +12,12 @@ const ChangeProfileImage = () => {
     for (const key of formData) console.log(key);
   };
 
+=======
+import './ChangeProfileImage.scss';
+import DefaultButton from '../../../components/DefaultButton/DefaultButton';
+
+const ChangeProfileImage = () => {
+>>>>>>> develop
   return (
     <>
       <div className="avatar">
@@ -18,6 +25,7 @@ const ChangeProfileImage = () => {
         <span className="editBox">
           <MdModeEditOutline size={30} className="editBtn" />
           <p>변경</p>
+<<<<<<< HEAD
           <input
             type="file"
             name="file"
@@ -25,6 +33,9 @@ const ChangeProfileImage = () => {
             className="fileUp"
             onClick={handleFileUpload}
           />
+=======
+          <input type="file" name="file" accept="image/*" className="fileUp" />
+>>>>>>> develop
         </span>
       </div>
 
