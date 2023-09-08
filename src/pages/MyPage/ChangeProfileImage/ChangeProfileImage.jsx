@@ -24,8 +24,7 @@ const ChangeProfileImage = () => {
     }
   };
 
-  const onSubmitChange = async e => {
-    e.preventDefault();
+  const onSubmitChange = async () => {
     const formData = new FormData();
     formData.append('image', file);
 
