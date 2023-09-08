@@ -8,6 +8,7 @@ const ContainerBox = ({
   firstAccountName,
   secondAccountImage,
   secondAccountName,
+  onClick,
 }) => {
   return (
     <div className="container">
@@ -34,7 +35,9 @@ const ContainerBox = ({
           <img className="accountImage" src={secondAccountImage} alt="은행" />
           <p className="accountName">{secondAccountName}</p>
         </div>
-        <button className="moreAccount">더보기</button>
+        <button className="moreAccount" onClick={onClick}>
+          더보기
+        </button>
       </div>
     </div>
   );

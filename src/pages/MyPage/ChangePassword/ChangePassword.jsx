@@ -32,7 +32,15 @@ const ChangePassword = () => {
     navigate('/main');
 
     try {
-      const res = await axios.post(baseUrl, { existingPassword, newPassword });
+      const res = await axios.post(
+        baseUrl,
+        { existingPassword, newPassword },
+        {
+          headers: {
+            Authorization: localStorage.getItem('token'),
+          },
+        },
+      );
 
       if (res.data.message === 'invalid password') {
         alert('기존 비밀번호를 확인해주세요');
