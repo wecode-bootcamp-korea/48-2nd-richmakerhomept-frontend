@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { CiUser, CiLock } from 'react-icons/ci';
+import {
+  JOIN_USER_INPUTS,
+  koreanPattern,
+  passwordPattern,
+} from '../../../utils/constant';
 import DefaultInput from '../../../components/DefaultInput/DefaultInput';
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './Join.scss';
-import { useNavigate } from 'react-router';
-import { koreanPattern, passwordPattern } from '../../../utils/constant';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 const userPhoneNumber = localStorage.getItem('userPhoneNumber');
+
+const signupUser = userInfo => {
+  return axios.post(`${baseUrl}/user/signup`, userInfo, {
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+  });
+};
 
 const Join = () => {
   const navigate = useNavigate();
@@ -35,26 +47,24 @@ const Join = () => {
   const allUserInfoIsValid =
     userNameIsValid && passwordIsValid && passwordCheckIsValid;
 
+  const mutation = useMutation(signupUser, {
+    onSuccess: data => {
+      const message = data.data.message;
+      if (message === 'user is created') {
+        localStorage.removeItem('userPhoneNumber');
+        alert('회원가입이 완료되었습니다.');
+        navigate('/login');
+      } else {
+        alert(`회원가입에 실패했습니다. (에러 : ${message})`);
+      }
+    },
+    onError: error => {
+      console.log(`ERROR : ${error}`);
+    },
+  });
+
   const handlePostJoinUserInfo = () => {
-    axios
-      .post(`${baseUrl}/user/signup`, userInfo, {
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-      })
-      .then(response => {
-        const message = response.message;
-        if (message === 'user is created') {
-          localStorage.removeItem('userPhoneNumber');
-          alert('회원가입이 완료되었습니다.');
-          navigate('/login');
-        } else if (message === 'user is confirmed') {
-          alert(`회원가입에 실패했습니다. (에러 : ${message})`);
-        }
-      })
-      .catch(error => {
-        console.log(`ERROR : ${error}`);
-      });
+    mutation.mutate(userInfo);
   };
 
   return (
@@ -77,32 +87,25 @@ const Join = () => {
           </p>
         )}
         <h1 className="title">정보를 입력해주세요.</h1>
-        <DefaultInput
-          icon={<CiUser className="inputIcon" />}
-          type="text"
-          placeholder="이름"
-          id="userName"
-          value={userInfo.userName}
-          onChange={handleChangeUserInfo}
-        />
-        <DefaultInput
-          icon={<CiLock className="inputIcon" />}
-          type="password"
-          placeholder="비밀번호"
-          id="password"
-          value={userInfo.password}
-          onChange={handleChangeUserInfo}
-        />
-        <DefaultInput
-          icon={<CiLock className="inputIcon" />}
-          type="password"
-          placeholder="비밀번호 확인"
-          id="passwordCheck"
-          value={passwordCheck}
-          onChange={e => {
-            setPasswordCheck(e.target.value);
-          }}
-        />
+        {JOIN_USER_INPUTS.map(inputItem => (
+          <DefaultInput
+            key={inputItem.id}
+            icon={inputItem.icon}
+            type={inputItem.type}
+            placeholder={inputItem.placeholder}
+            id={inputItem.id}
+            value={
+              inputItem.id === 'passwordCheck'
+                ? passwordCheck
+                : userInfo[inputItem.id]
+            }
+            onChange={
+              inputItem.id === 'passwordCheck'
+                ? e => setPasswordCheck(e.target.value)
+                : handleChangeUserInfo
+            }
+          />
+        ))}
         <DefaultButton
           text="다음"
           onClick={handlePostJoinUserInfo}

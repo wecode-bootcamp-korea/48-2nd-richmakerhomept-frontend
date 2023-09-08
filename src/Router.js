@@ -9,6 +9,8 @@ import Navbar from './components/Navbar/Navbar';
 import MyPage from './pages/MyPage/MyPage';
 import AddUser from './pages/AddUser/AddUser';
 import GroupManagement from './pages/GroupManagement/GroupManagement';
+import IncomeDetail from './pages/Main/pages/IncomeDetail/IncomeDetail';
+import SpendingDetail from './pages/Main/pages/SpendingDetail/SpendingDetail';
 
 const Router = () => {
   return (
@@ -23,6 +25,24 @@ const Router = () => {
           element={
             <>
               <Main />
+              <Navbar />
+            </>
+          }
+        />
+        <Route
+          path="/main/income"
+          element={
+            <>
+              <IncomeDetail />
+              <Navbar />
+            </>
+          }
+        />
+        <Route
+          path="/main/spending"
+          element={
+            <>
+              <SpendingDetail />
               <Navbar />
             </>
           }

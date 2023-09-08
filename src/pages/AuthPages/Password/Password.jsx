@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { passwordPattern } from '../../../utils/constant';
 import { CiLock } from 'react-icons/ci';
@@ -17,23 +18,27 @@ const Password = () => {
 
   const passwordIsValid = passwordPattern.test(password);
 
-  const handlePostPassword = () => {
-    axios
-      .post(`${baseUrl}/user/signin`, {
-        phoneNumber: userPhoneNumber,
-        password: password,
-      })
-      .then(response => {
-        if (response.accessToken) {
-          localStorage.setItem('accessToken', response.accessToken);
+  const signInMutation = useMutation(
+    ({ phoneNumber, password }) =>
+      axios.post(`${baseUrl}/user/signin`, { phoneNumber, password }),
+    {
+      onSuccess: data => {
+        if (data.data.accessToken) {
+          localStorage.setItem('accessToken', data.data.accessToken);
           navigate('/main');
         } else {
           alert('비밀번호를 확인해주세요.');
+          console.log(data.data.message);
         }
-      })
-      .catch(error => {
+      },
+      onError: error => {
         console.log(`ERROR : ${error}`);
-      });
+      },
+    },
+  );
+
+  const handlePostPassword = () => {
+    signInMutation.mutate({ phoneNumber: userPhoneNumber, password: password });
   };
 
   return (
