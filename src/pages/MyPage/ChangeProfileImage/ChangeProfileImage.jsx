@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AiOutlineUser } from 'react-icons/ai';
 import { MdModeEditOutline } from 'react-icons/md';
 import { config } from '../../../utils/constant';
+import { useGetProfileImage } from '../../../hooks/api/useGetProfileImage';
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './ChangeProfileImage.scss';
 
@@ -28,10 +29,16 @@ const ChangeProfileImage = () => {
     const formData = new FormData();
     formData.append('image', file);
 
-    await axios
-      .post(baseUrl, formData, config)
-      .then(result => console.log(result))
-      .catch(error => console.log(error));
+    const headers = {
+      ...config.headers,
+      Authorization: localStorage.getItem('token'),
+    };
+
+    try {
+      await axios.post(baseUrl, formData, { headers });
+    } catch (err) {
+      console.log(`ERROR: ${err}`);
+    }
   };
 
   const handleSubmitImage = () => {
@@ -39,12 +46,12 @@ const ChangeProfileImage = () => {
     navigate('/main');
   };
 
-  // useEffect(() => {
-  //   axios
-  //     .get(baseUrl)
-  //     .then(result => console.log(result))
-  //     .catch(error => console.log(error));
-  // }, []);
+  const { isLoading, data, isError } = useGetProfileImage();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error...</div>;
+
+  // console.log(data);
 
   return (
     <>

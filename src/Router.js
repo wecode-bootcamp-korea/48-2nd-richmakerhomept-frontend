@@ -11,9 +11,12 @@ import AddUser from './pages/AddUser/AddUser';
 import GroupManagement from './pages/GroupManagement/GroupManagement';
 import IncomeDetail from './pages/Main/pages/IncomeDetail/IncomeDetail';
 import SpendingDetail from './pages/Main/pages/SpendingDetail/SpendingDetail';
-import GroupUserList from './pages/GroupUserList/GroupUserList';
+import GroupUserList from './pages/GroupManagement/pages/GroupUserList/GroupUserList';
+import AccountList from './pages/GroupManagement/pages/AccountList/AccountList';
+import CardList from './pages/GroupManagement/pages/CardList/CardList';
+import AddAccount from './pages/GroupManagement/pages/AddAccount/AddAccount';
 
-const Router = () => {
+const Router = ({ hideNavbar }) => {
   return (
     <BrowserRouter>
       <Routes>
@@ -50,8 +53,19 @@ const Router = () => {
         />
         <Route path="/add-user" element={<AddUser />} />
         <Route path="/my-page" element={<MyPage />} />
-        <Route path="/group" element={<GroupManagement />} />
+        <Route
+          path="/group"
+          element={
+            <>
+              <GroupManagement />
+              <Navbar />
+            </>
+          }
+        />
         <Route path="/group/group-user" element={<GroupUserList />} />
+        <Route path="/group/account" element={<AccountList />} />
+        <Route path="/group/card" element={<CardList />} />
+        <Route path="/group/add-account" element={<AddAccount />} />
       </Routes>
     </BrowserRouter>
   );
