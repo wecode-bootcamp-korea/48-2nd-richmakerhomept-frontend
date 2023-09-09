@@ -7,6 +7,7 @@ import Join from './pages/AuthPages/Join/Join';
 import Main from './pages/Main/Main';
 import Navbar from './components/Navbar/Navbar';
 import MyPage from './pages/MyPage/MyPage';
+import AddUser from './pages/AddUser/AddUser';
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
             </>
           }
         />
+        <Route path="/add-user" element={<AddUser />} />
         <Route path="/my-page" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
