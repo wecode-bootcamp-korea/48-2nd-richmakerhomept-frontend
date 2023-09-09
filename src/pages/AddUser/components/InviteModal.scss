@@ -1,0 +1,44 @@
+.inviteModalBackGround {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .inviteModal {
+    display: flex;
+    flex-direction: column;
+    height: 35%;
+    padding: 0 25px 25px;
+    overflow-y: scroll;
+    background-color: #ffffff;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-track:hover {
+      background-color: transparent;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      margin: 10px 0 20px;
+    }
+
+    .inviteButton {
+      max-width: 35%;
+      width: 100%;
+    }
+  }
+}
