@@ -27,17 +27,19 @@ const ChangePassword = () => {
     }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     navigate('/main');
 
-    axios
-      .post(baseUrl, { existingPassword, newPassword })
-      .then(res => {
-        if (res.message === 'inValid password')
-          alert('기존 비밀번호를 확인해주세요');
-      })
-      .catch(err => console.log(`ERROR : ${err}`));
+    try {
+      const res = await axios.post(baseUrl, { existingPassword, newPassword });
+
+      if (res.data.message === 'invalid password') {
+        alert('기존 비밀번호를 확인해주세요');
+      }
+    } catch (err) {
+      console.log(`ERROR : ${err}`);
+    }
   };
 
   const existingPasswordIsValid = passwordPattern.test(existingPassword);

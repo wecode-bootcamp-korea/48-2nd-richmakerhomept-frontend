@@ -1,0 +1,77 @@
+@import '../../../styles/variables.scss';
+
+.container {
+  width: 100%;
+  border-radius: 20px;
+  padding: 25px 20px;
+  background-color: $grey22;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+
+  .boxHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid $grey22;
+    padding-bottom: 20px;
+
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .count {
+      border-radius: 100px;
+      padding: 5px 8px;
+      font-size: 13px;
+      background-color: rgb(229, 229, 239);
+    }
+  }
+
+  .accountListBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+
+    .accountListContainer {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      padding-top: 20px;
+
+      .userPofileImage {
+        width: 30px;
+        border-radius: 50%;
+      }
+
+      .accountImage {
+        position: absolute;
+        top: 24px;
+        left: 40px;
+        width: 100px;
+        height: 20px;
+        clip: rect(0, 42px, 30px, 0);
+      }
+
+      .accountName {
+        font-size: 12px;
+        font-weight: bold;
+      }
+    }
+
+    .moreAccount {
+      padding: 12px;
+      border: 1px solid rgb(229, 229, 239);
+      border-radius: 10px;
+      font-size: 12px;
+      background-color: transparent;
+
+      &:hover {
+        background-color: rgb(229, 229, 239);
+        cursor: pointer;
+      }
+    }
+  }
+}
