@@ -1,0 +1,91 @@
+@import '../../styles/variables.scss';
+
+.groupContainer {
+  max-width: 90%;
+  width: 100%;
+  margin: 0 auto;
+
+  .groupContentContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 5%;
+
+    .header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .pofileImage {
+        width: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .addAccount {
+        cursor: pointer;
+      }
+    }
+
+    .totalPrice {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border-radius: 20px;
+      padding: 25px 20px;
+      background-color: $grey22;
+      box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+
+      .detailBox {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .detail {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .title {
+            font-size: 20px;
+            font-weight: bold;
+          }
+
+          .count {
+            border-radius: 100px;
+            padding: 5px 8px;
+            font-size: 13px;
+            background-color: rgb(229, 229, 239);
+          }
+        }
+
+        .price {
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .addUserBox {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 20px;
+      padding: 25px 20px;
+      margin-bottom: 30px;
+      background-color: $grey22;
+      box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+
+      .title {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .addUserButton {
+        cursor: pointer;
+      }
+    }
+  }
+}

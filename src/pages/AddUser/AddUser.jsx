@@ -13,7 +13,7 @@ const AddUser = () => {
 
   return (
     <div className="addUserContainer">
-      <GrGroup size={200} />
+      <GrGroup size={160} />
       <div className="contentBox">
         <p className="content">
           <span>공동관리</span>로 관리하세요
