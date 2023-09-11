@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  gap: 60px;
+  gap: 30px;
 
   .pageTitleBox {
     font-size: 18px;
@@ -25,6 +25,25 @@
     flex-direction: column;
     align-items: center;
     gap: 40px;
+    padding-bottom: 10%;
+
+    .userAuth {
+      position: absolute;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      display: flex;
+      width: 90%;
+      top: 35px;
+      left: 103px;
+    }
+    .userAuthComplete {
+      color: lightgreen;
+      left: 135px;
+    }
+    .userAuthPlease {
+      color: rgba(255, 0, 0, 0.6);
+    }
 
     .userNameInvalidMessage,
     .passwordInvalidMessage,
@@ -39,13 +58,17 @@
     }
 
     .userNameInvalidMessage {
-      top: 130px;
+      top: 295px;
     }
     .passwordInvalidMessage {
-      top: 230px;
+      top: 395px;
     }
     .passwordCheckInvalidMessage {
-      top: 330px;
+      top: 495px;
+    }
+
+    .userPhoneNumber {
+      font-size: 25px;
     }
 
     .title {

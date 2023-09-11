@@ -44,7 +44,6 @@ const PhoneNumber = () => {
 
   const mutation = useMutation(postPhoneNumber, {
     onSuccess: data => {
-      console.log(data);
       const message = data.message;
       localStorage.setItem('userPhoneNumber', userPhoneNumber);
       if (message === 'INVALID_USER') {

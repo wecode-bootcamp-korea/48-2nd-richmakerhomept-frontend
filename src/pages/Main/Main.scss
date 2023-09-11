@@ -9,7 +9,7 @@
 
   .mainTopBar {
     width: 100%;
-    padding: 10px 3px;
+    padding: 0 3px 10px;
     border-bottom: 1px solid $grey22;
     display: flex;
     justify-content: space-between;
@@ -21,11 +21,19 @@
       align-items: center;
       font-weight: 600;
       font-size: 18px;
-      cursor: pointer;
+      letter-spacing: -1px;
+      cursor: default;
+
+      .logoutButton {
+        color: $grey60;
+        font-size: 12px;
+        cursor: pointer;
+      }
 
       .userProfileImage {
         font-size: 45px;
         color: lightblue;
+        cursor: pointer;
       }
     }
 
