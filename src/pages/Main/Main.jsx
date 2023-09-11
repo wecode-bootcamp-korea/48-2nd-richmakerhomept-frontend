@@ -8,17 +8,40 @@ import {
 } from 'react-icons/bi';
 import './Main.scss';
 
-const userName = '박동철'; /*localStorage.getItem('userName');*/
+const accessToken = localStorage.getItem('accessToken');
+const userName = localStorage.getItem('userName');
 
 const Main = () => {
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('phoneNumber');
+    localStorage.removeItem('profileImage');
+    navigate('/login');
+  };
+
+  if (!accessToken) {
+    alert('로그인 후 이용해주세요.');
+    navigate('/login');
+    return;
+  }
 
   return (
     <div className="main">
       <header className="mainTopBar">
         <div className="userProfile">
-          <BiSolidUserCircle className="userProfileImage" />
-          {userName}님
+          <BiSolidUserCircle
+            className="userProfileImage"
+            onClick={() => {
+              navigate('/my-page');
+            }}
+          />
+          {userName}님{' '}
+          <span className="logoutButton" onClick={handleLogout}>
+            로그아웃
+          </span>
         </div>
         <BiBell className="bell" />
       </header>
@@ -29,7 +52,12 @@ const Main = () => {
           <BiCalendar className="calendarIcon" />
         </div>
 
-        <div className="reportDiv">
+        <div
+          className="reportDiv"
+          onClick={() => {
+            navigate('/main/my-report');
+          }}
+        >
           <h3 className="reportTitle">리포트</h3>
           <p className="reportMessage">
             예산을 설정해보세요
@@ -61,7 +89,12 @@ const Main = () => {
         </div>
 
         {/* 나중에 데이터 통신 성공 시 아래 항목들 ?.map돌릴 것 */}
-        <div className="mySpendings">
+        <div
+          className="mySpendings"
+          onClick={() => {
+            navigate('/main/regular-spending');
+          }}
+        >
           <h3 className="myTitle">정기지출</h3>
           <ul className="myList">
             <li className="listItem">
@@ -74,7 +107,12 @@ const Main = () => {
             </li>
           </ul>
         </div>
-        <div className="mySpendings">
+        <div
+          className="mySpendings"
+          onClick={() => {
+            navigate('/main/floating-spending');
+          }}
+        >
           <h3 className="myTitle">변동지출</h3>
           <ul className="myList">
             <li className="listItem">
@@ -87,7 +125,12 @@ const Main = () => {
             </li>
           </ul>
         </div>
-        <div className="mySpendings">
+        <div
+          className="mySpendings"
+          onClick={() => {
+            navigate('/main/installment-spending');
+          }}
+        >
           <h3 className="myTitle">할부지출</h3>
           <ul className="myList">
             <li className="listItem">

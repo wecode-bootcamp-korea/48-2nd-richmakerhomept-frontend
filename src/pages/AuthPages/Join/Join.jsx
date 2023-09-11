@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import useAuthMutation from '../../../hooks/api/user/useAuthMutation';
+import useSignupMutation from '../../../hooks/api/user/useSignupMutation';
 import {
   JOIN_USER_INPUTS,
   koreanPattern,
@@ -11,25 +11,18 @@ import DefaultInput from '../../../components/DefaultInput/DefaultInput';
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './Join.scss';
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
-const userPhoneNumber = localStorage.getItem('userPhoneNumber');
-
-const signupUser = userInfo => {
-  return axios.post(`${baseUrl}/user/signup`, userInfo, {
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-  });
-};
-
 const Join = () => {
   const navigate = useNavigate();
+
+  const userPhoneNumber = localStorage.getItem('userPhoneNumber');
 
   const [userInfo, setUserInfo] = useState({
     userName: '',
     phoneNumber: userPhoneNumber,
     password: '',
+    CI: '',
   });
+  console.log(userInfo);
 
   const [passwordCheck, setPasswordCheck] = useState('');
 
@@ -41,36 +34,47 @@ const Join = () => {
     });
   };
 
+  const [userAuth, setUserAuth] = useState(false);
   const userNameIsValid = koreanPattern.test(userInfo.userName);
   const passwordIsValid = passwordPattern.test(userInfo.password);
   const passwordCheckIsValid = userInfo.password === passwordCheck;
   const allUserInfoIsValid =
-    userNameIsValid && passwordIsValid && passwordCheckIsValid;
+    userAuth && userNameIsValid && passwordIsValid && passwordCheckIsValid;
 
-  const mutation = useMutation(signupUser, {
-    onSuccess: data => {
-      const message = data.data.message;
-      if (message === 'user is created') {
-        localStorage.removeItem('userPhoneNumber');
-        alert('회원가입이 완료되었습니다.');
-        navigate('/login');
-      } else {
-        alert(`회원가입에 실패했습니다. (에러 : ${message})`);
-      }
-    },
-    onError: error => {
-      console.log(`ERROR : ${error}`);
-    },
-  });
+  const onSuccessAuthCallback = data => {
+    setUserAuth(true);
+    setUserInfo(prevState => ({ ...prevState, CI: data.CI }));
+  };
+
+  const authMutation = useAuthMutation(onSuccessAuthCallback);
+  const personalAuth = () => {
+    authMutation.mutate(userPhoneNumber);
+  };
+
+  const onSuccessSignupCallback = () => {
+    navigate('/login');
+  };
+  const onErrorSignupCallback = error => {
+    console.log(`onErrorSignupCallback_ERROR : ${error.message}`);
+  };
+  const signupMutation = useSignupMutation(
+    onSuccessSignupCallback,
+    onErrorSignupCallback,
+  );
 
   const handlePostJoinUserInfo = () => {
-    mutation.mutate(userInfo);
+    signupMutation.mutate(userInfo);
   };
 
   return (
     <div className="joinPage">
       <header className="pageTitleBox">회원가입</header>
       <div className="phoneNumber">
+        {userAuth ? (
+          <p className="userAuth userAuthComplete">본인인증 완료.</p>
+        ) : (
+          <p className="userAuth userAuthPlease">본인인증을 진행해주세요.</p>
+        )}
         {!userNameIsValid && (
           <p className="userNameInvalidMessage">
             한국어 이름만 입력 가능합니다. (2글자 이상)
@@ -86,6 +90,10 @@ const Join = () => {
             비밀번호와 일치하지 않습니다.
           </p>
         )}
+
+        <h1 className="userPhoneNumber">{userPhoneNumber}</h1>
+        <DefaultButton text="본인인증" onClick={personalAuth} />
+
         <h1 className="title">정보를 입력해주세요.</h1>
         {JOIN_USER_INPUTS.map(inputItem => (
           <DefaultInput

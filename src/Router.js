@@ -9,6 +9,7 @@ import Navbar from './components/Navbar/Navbar';
 import MyPage from './pages/MyPage/MyPage';
 import AddUser from './pages/AddUser/AddUser';
 import GroupManagement from './pages/GroupManagement/GroupManagement';
+import MyReport from './pages/Main/pages/MyReport/MyReport';
 import IncomeDetail from './pages/Main/pages/IncomeDetail/IncomeDetail';
 import SpendingDetail from './pages/Main/pages/SpendingDetail/SpendingDetail';
 import GroupUserList from './pages/GroupManagement/pages/GroupUserList/GroupUserList';
@@ -16,7 +17,7 @@ import AccountList from './pages/GroupManagement/pages/AccountList/AccountList';
 import CardList from './pages/GroupManagement/pages/CardList/CardList';
 import AddAccount from './pages/GroupManagement/pages/AddAccount/AddAccount';
 
-const Router = ({ hideNavbar }) => {
+const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -29,6 +30,15 @@ const Router = ({ hideNavbar }) => {
           element={
             <>
               <Main />
+              <Navbar />
+            </>
+          }
+        />
+        <Route
+          path="/main/my-report"
+          element={
+            <>
+              <MyReport />
               <Navbar />
             </>
           }
