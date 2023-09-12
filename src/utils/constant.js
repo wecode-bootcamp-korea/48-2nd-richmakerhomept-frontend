@@ -91,3 +91,49 @@ export const CALENDAR_MODAL_LIST = [
 export const config = {
   headers: { 'Content-Type': 'multipart/form-data' },
 };
+
+/** 데이터 GET 대비하여 만든 임시 데이터로 이후 제거할 것입니다. */
+export const TEMPORARY_DATA = [
+  {
+    date: '11일',
+    totalAmount: '24,000원',
+    breakdown: [
+      {
+        category: '카페/간식',
+        title: '이디야',
+        amount: '5,000',
+        info: '토스뱅크카드',
+      },
+      {
+        category: '외식',
+        title: '애슐리',
+        amount: '19,000',
+        info: '현대카드',
+      },
+    ],
+  },
+  {
+    date: '9일',
+    totalAmount: '16,450원',
+    breakdown: [
+      {
+        category: '기타',
+        title: '다트쉐어링',
+        amount: '1,650',
+        info: '토스뱅크카드',
+      },
+      {
+        category: '이체',
+        title: '이인재',
+        amount: '9,900',
+        info: '토스뱅크계좌',
+      },
+      {
+        category: '이체',
+        title: '김만규',
+        amount: '4,900',
+        info: '토스뱅크계좌',
+      },
+    ],
+  },
+];
