@@ -61,14 +61,14 @@ const FloatingSpending = () => {
             </button>
           </div>
           <div className="floatingSpendingBreakdown">
-            {TEMPORARY_DATA.map(data => (
-              <div className="breakdownByCategory">
+            {TEMPORARY_DATA.map((data, i) => (
+              <div key={i} className="breakdownByCategory">
                 <div className="dateAndAmount">
                   <h4 className="date">{data.date}</h4>
                   <h4 className="amount">{data.totalAmount}</h4>
                 </div>
-                {data.breakdown.map(breakdown => (
-                  <div className="breakdownCard">
+                {data.breakdown.map((breakdown, i) => (
+                  <div key={i} className="breakdownCard">
                     <div className="cardLeft">
                       <img
                         className="bankImg"
