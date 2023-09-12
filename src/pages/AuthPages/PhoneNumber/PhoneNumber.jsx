@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { CiUser } from 'react-icons/ci';
 import { phoneNumberPattern } from '../../../utils/constant';
+import usePostPhoneNumberMutation from '../../../hooks/api/user/usePostPhoneNumberMutation';
 import DefaultInput from '../../../components/DefaultInput/DefaultInput';
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './PhoneNumber.scss';
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
-
 const PhoneNumber = () => {
   const navigate = useNavigate();
-
   const [userPhoneNumber, setUserPhoneNumber] = useState('');
-
   const phoneNumberIsValid = phoneNumberPattern.test(userPhoneNumber);
 
   const handleInputChange = e => {
@@ -26,39 +21,17 @@ const PhoneNumber = () => {
     setUserPhoneNumber(onlyNumber);
   };
 
-  const postPhoneNumber = async phoneNumber => {
-    const response = await axios.post(
-      `${baseUrl}/user/presignin`,
-      {
-        phoneNumber,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-      },
-    );
-
-    return response.data;
+  const onSuccessNavigate = path => {
+    navigate(path);
   };
 
-  const mutation = useMutation(postPhoneNumber, {
-    onSuccess: data => {
-      const message = data.message;
-      localStorage.setItem('userPhoneNumber', userPhoneNumber);
-      if (message === 'INVALID_USER') {
-        navigate('/join');
-      } else if (message === 'user is confirmed') {
-        navigate('/password');
-      }
-    },
-    onError: error => {
-      console.log(`ERROR : ${error}`);
-    },
-  });
+  const mutation = usePostPhoneNumberMutation(
+    userPhoneNumber,
+    onSuccessNavigate,
+  );
 
   const handlePostPhoneNumber = () => {
-    mutation.mutate(userPhoneNumber);
+    mutation.mutate();
   };
 
   return (

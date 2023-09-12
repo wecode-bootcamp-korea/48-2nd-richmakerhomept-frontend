@@ -37,7 +37,7 @@ const ChangePassword = () => {
         { existingPassword, newPassword },
         {
           headers: {
-            Authorization: localStorage.getItem('token'),
+            Authorization: localStorage.getItem('accessToken'),
           },
         },
       );
