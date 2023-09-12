@@ -12,6 +12,7 @@ import GroupManagement from './pages/GroupManagement/GroupManagement';
 import MyReport from './pages/Main/pages/MyReport/MyReport';
 import IncomeDetail from './pages/Main/pages/IncomeDetail/IncomeDetail';
 import SpendingDetail from './pages/Main/pages/SpendingDetail/SpendingDetail';
+import FloatingSpending from './pages/Main/pages/KindOfSpending/FloatingSpending/FloatingSpending';
 import GroupUserList from './pages/GroupManagement/pages/GroupUserList/GroupUserList';
 import AccountList from './pages/GroupManagement/pages/AccountList/AccountList';
 import CardList from './pages/GroupManagement/pages/CardList/CardList';
@@ -57,6 +58,15 @@ const Router = () => {
           element={
             <>
               <SpendingDetail />
+              <Navbar />
+            </>
+          }
+        />
+        <Route
+          path="/main/floating-spending"
+          element={
+            <>
+              <FloatingSpending />
               <Navbar />
             </>
           }

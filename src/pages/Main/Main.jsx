@@ -144,6 +144,23 @@ const Main = () => {
             </li>
           </ul>
         </div>
+        {/* 여기까지 */}
+        <div className="donutChartDiv">
+          <h3 className="chartTitle">카테고리별 지출</h3>
+          <div className="donutChart">차트 들어갈 곳.</div>
+          <div className="chartCategory">
+            <p>이체</p>
+            <p>600,000원</p>
+          </div>
+          <div className="chartCategory">
+            <p>해외</p>
+            <p>12,970원</p>
+          </div>
+          <div className="chartCategory">
+            <p>기타</p>
+            <p>121,870원</p>
+          </div>
+        </div>
       </main>
     </div>
   );
