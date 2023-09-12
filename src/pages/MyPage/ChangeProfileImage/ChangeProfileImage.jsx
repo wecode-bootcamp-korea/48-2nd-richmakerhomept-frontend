@@ -31,7 +31,7 @@ const ChangeProfileImage = () => {
 
     const headers = {
       ...config.headers,
-      Authorization: localStorage.getItem('token'),
+      Authorization: localStorage.getItem('accessToken'),
     };
 
     try {

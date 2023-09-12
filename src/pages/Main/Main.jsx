@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   BiCalendar,
@@ -22,11 +22,12 @@ const Main = () => {
     navigate('/login');
   };
 
-  if (!accessToken) {
-    alert('로그인 후 이용해주세요.');
-    navigate('/login');
-    return;
-  }
+  useEffect(() => {
+    if (!accessToken) {
+      alert('로그인 후 이용해주세요.');
+      navigate('/login');
+    }
+  }, []);
 
   return (
     <div className="main">

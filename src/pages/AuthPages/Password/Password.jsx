@@ -1,46 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { passwordPattern } from '../../../utils/constant';
 import { CiLock } from 'react-icons/ci';
+import useSignInMutation from '../../../hooks/api/user/useSignInMutation';
 import DefaultInput from '../../../components/DefaultInput/DefaultInput';
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './Password.scss';
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
-
 const Password = () => {
   const navigate = useNavigate();
-
   const [password, setPassword] = useState('');
-
   const passwordIsValid = passwordPattern.test(password);
-
   const userPhoneNumber = localStorage.getItem('userPhoneNumber');
 
-  const signInMutation = useMutation(
-    ({ phoneNumber, password }) =>
-      axios.post(`${baseUrl}/user/signin`, { phoneNumber, password }),
-    {
-      onSuccess: data => {
-        if (data.data.accessToken) {
-          localStorage.setItem('accessToken', data.data.accessToken);
-          localStorage.setItem('userName', data.data.userName);
-          localStorage.setItem('phoneNumber', data.data.phoneNumber);
-          localStorage.setItem('profileImage', data.data.profileImage);
-          localStorage.removeItem('userPhoneNumber');
-          navigate('/main');
-        } else {
-          alert('비밀번호를 확인해주세요.');
-        }
-      },
-      onError: error => {
-        console.log(`ERROR : ${error}`);
-      },
-    },
-  );
-
+  const onSuccessSignIn = () => {
+    navigate('/main');
+  };
+  const signInMutation = useSignInMutation(onSuccessSignIn);
   const handlePostPassword = () => {
     signInMutation.mutate({ phoneNumber: userPhoneNumber, password: password });
   };
