@@ -14,8 +14,8 @@ import IncomeDetail from './pages/Main/pages/IncomeDetail/IncomeDetail';
 import SpendingDetail from './pages/Main/pages/SpendingDetail/SpendingDetail';
 import FloatingSpending from './pages/Main/pages/KindOfSpending/FloatingSpending/FloatingSpending';
 import GroupUserList from './pages/GroupManagement/pages/GroupUserList/GroupUserList';
-import AccountList from './pages/GroupManagement/pages/AccountList/AccountList';
-import CardList from './pages/GroupManagement/pages/CardList/CardList';
+import GroupAccountList from './pages/GroupManagement/pages/GroupAccountList/GroupAccountList';
+import GroupCardList from './pages/GroupManagement/pages/GroupCardList/GroupCardList';
 import AddAccount from './pages/GroupManagement/pages/AddAccount/AddAccount';
 
 const Router = () => {
@@ -83,8 +83,8 @@ const Router = () => {
           }
         />
         <Route path="/group/group-user" element={<GroupUserList />} />
-        <Route path="/group/account" element={<AccountList />} />
-        <Route path="/group/card" element={<CardList />} />
+        <Route path="/group/account" element={<GroupAccountList />} />
+        <Route path="/group/card" element={<GroupCardList />} />
         <Route path="/group/add-account" element={<AddAccount />} />
       </Routes>
     </BrowserRouter>
