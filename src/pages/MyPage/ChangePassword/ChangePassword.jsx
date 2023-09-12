@@ -29,11 +29,11 @@ const ChangePassword = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    navigate('/main');
+    // navigate('/main');
 
     try {
       const res = await axios.post(
-        baseUrl,
+        `${baseUrl}/user/password`,
         { existingPassword, newPassword },
         {
           headers: {
@@ -41,6 +41,16 @@ const ChangePassword = () => {
           },
         },
       );
+
+      console.log(res);
+
+      if (res.data.message === 'changePassword') {
+        navigate('/main');
+      }
+
+      if (res.data.message === 'Incorrect current password') {
+        alert('기존 비밀번호를 확인해주세요.');
+      }
 
       if (res.data.message === 'invalid password') {
         alert('기존 비밀번호를 확인해주세요');

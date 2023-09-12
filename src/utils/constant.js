@@ -137,3 +137,10 @@ export const TEMPORARY_DATA = [
     ],
   },
 ];
+
+/** 통신 전 임의 데이터 (삭제 예정) */
+export const GROUP_CARD_TABS = [
+  { id: 1, label: '공동' },
+  { id: 2, label: '이연희' },
+  { id: 3, label: '김판호' },
+];
