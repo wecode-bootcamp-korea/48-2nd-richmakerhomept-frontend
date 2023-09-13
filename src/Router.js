@@ -17,6 +17,7 @@ import GroupUserList from './pages/GroupManagement/pages/GroupUserList/GroupUser
 import GroupAccountList from './pages/GroupManagement/pages/GroupAccountList/GroupAccountList';
 import GroupCardList from './pages/GroupManagement/pages/GroupCardList/GroupCardList';
 import AddAccount from './pages/GroupManagement/pages/AddAccount/AddAccount';
+import GroupTotalPriceDetail from './pages/GroupManagement/pages/GroupTotalPriceDetail/GroupTotalPriceDetail';
 
 const Router = () => {
   return (
@@ -86,6 +87,7 @@ const Router = () => {
         <Route path="/group/account" element={<GroupAccountList />} />
         <Route path="/group/card" element={<GroupCardList />} />
         <Route path="/group/add-account" element={<AddAccount />} />
+        <Route path="/group/use" element={<GroupTotalPriceDetail />} />
       </Routes>
     </BrowserRouter>
   );
