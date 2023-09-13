@@ -1,3 +1,215 @@
-.hi {
-  background-color: #fff;
+@import '../../styles/variables.scss';
+
+.main {
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .mainTopBar {
+    width: 100%;
+    padding: 0 3px 10px;
+    border-bottom: 1px solid $grey22;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .userProfile {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -1px;
+      cursor: default;
+
+      .logoutButton {
+        color: $grey60;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      .userProfileImage {
+        font-size: 45px;
+        color: lightblue;
+        cursor: pointer;
+      }
+    }
+
+    .bell {
+      font-size: 30px;
+      cursor: pointer;
+    }
+  }
+
+  .mainContents {
+    width: 100%;
+    padding-bottom: 25%;
+
+    .monthDiv {
+      width: 100%;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+
+      .monthTitle {
+        font-size: 25px;
+        font-weight: 900;
+        margin: 0 3px;
+        cursor: pointer;
+      }
+
+      .calendarIcon {
+        font-size: 25px;
+        padding: 3px;
+        margin-left: 3px;
+        cursor: pointer;
+        border: 1px solid $grey80;
+        border-radius: 50%;
+      }
+    }
+
+    .reportDiv {
+      width: 100%;
+      height: 65px;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #ffffff;
+      border-radius: 10px;
+      background: linear-gradient(92deg, #868cff 0%, #4318ff 100%);
+      margin: 10px 0;
+      cursor: pointer;
+
+      .reportTitle {
+        font-size: 22px;
+        font-weight: 900;
+      }
+
+      .reportMessage {
+        font-size: 12px;
+        .chartIcon {
+          font-size: 20px;
+          margin-left: 2px;
+          margin-bottom: -3px;
+          color: greenyellow;
+        }
+      }
+    }
+
+    .transactionDiv {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+
+      .transactionBox {
+        width: 47.5%;
+        height: 100px;
+        border-radius: 10px;
+        color: #ffffff;
+        padding: 20px;
+        cursor: pointer;
+
+        .transactionCategory {
+          font-size: 19px;
+        }
+        .transactionAmount {
+          margin-top: 20px;
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+
+      .income {
+        background-color: #868cff;
+      }
+      .spending {
+        background-color: #4318ff;
+      }
+    }
+
+    .mySpendings {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+      background-color: $grey22;
+      cursor: pointer;
+
+      .myTitle {
+        font-size: 18px;
+        color: $ocean;
+      }
+
+      .myList {
+        margin-top: 10px;
+        .listItem {
+          width: 100%;
+          margin-top: 15px;
+          display: flex;
+          justify-content: space-between;
+
+          .listTitle,
+          .amount {
+            color: #444444;
+            font-weight: 900;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+
+    .donutChartDiv {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+      background-color: $grey22;
+
+      .chartTitle {
+        font-size: 18px;
+        color: $ocean;
+        margin-bottom: 15px;
+      }
+
+      .donutChart {
+        width: 100%;
+        height: 200px;
+        border-radius: 20px;
+        border: 1px solid $grey60;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        font-weight: 900;
+        color: $grey60;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+
+      .chartCategory {
+        margin-top: 10px;
+        padding: 15px 5px;
+        border-radius: 10px;
+        box-shadow:
+          rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+          rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        display: flex;
+        justify-content: space-between;
+        font-weight: 800;
+        color: #444444;
+        cursor: pointer;
+      }
+    }
+  }
 }
