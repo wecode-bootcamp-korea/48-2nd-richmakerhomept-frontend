@@ -44,7 +44,7 @@ const GroupManagement = () => {
             onClick={() => navigate('/group/add-account')}
           />
         </div>
-        <div className="totalPrice">
+        <div className="totalPrice" onClick={() => navigate('/group/use')}>
           <div className="detailBox">
             <div className="detail">
               <h1 className="title">수입</h1>
