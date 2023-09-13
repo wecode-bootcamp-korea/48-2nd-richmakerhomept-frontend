@@ -4,6 +4,7 @@ import Intro from './pages/Intro/Intro';
 import PhoneNumber from './pages/AuthPages/PhoneNumber/PhoneNumber';
 import Password from './pages/AuthPages/Password/Password';
 import Join from './pages/AuthPages/Join/Join';
+import AssetConnection from './pages/AssetConnection/AssetConnection';
 import Main from './pages/Main/Main';
 import Navbar from './components/Navbar/Navbar';
 import MyPage from './pages/MyPage/MyPage';
@@ -27,6 +28,7 @@ const Router = () => {
         <Route path="/login" element={<PhoneNumber />} />
         <Route path="/password" element={<Password />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/asset-connection" element={<AssetConnection />} />
         <Route
           path="/main"
           element={

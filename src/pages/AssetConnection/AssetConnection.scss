@@ -1,0 +1,93 @@
+@import '/src/styles/variables.scss';
+
+.assetConnection {
+  width: 90%;
+  margin: 0 auto;
+
+  header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $grey22;
+
+    .toBack {
+      font-size: 30px;
+      cursor: pointer;
+    }
+  }
+
+  .announcementMessage {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px 0;
+    border-bottom: 1px solid $grey22;
+
+    h5 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #444444;
+      .highlight {
+        color: $purple;
+        font-size: 17px;
+        font-weight: 900;
+      }
+    }
+  }
+
+  .categories {
+    display: flex;
+    padding: 10px 0 0 0;
+
+    .categoryButton {
+      border: 1px solid #ffffff;
+      border-bottom: 2px solid #ffffff;
+      background-color: #ffffff;
+      color: $grey60;
+      font-size: 16px;
+      letter-spacing: -1px;
+      cursor: pointer;
+
+      &.bold {
+        font-weight: 900;
+        border-bottom: 2px solid $purple;
+        color: #444444;
+      }
+    }
+  }
+
+  .assetList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+
+    .assetItem {
+      width: 100%;
+      padding: 10px 20px;
+      border: 1px solid $grey22;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      margin-top: 15px;
+
+      .assetImage {
+        width: 60px;
+        height: 33px;
+      }
+      .assetName {
+        font-size: 12px;
+        font-weight: 900;
+        border-left: 2px solid $grey22;
+        border-right: 2px solid $grey22;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .assetNumber {
+        padding-left: 10px;
+        font-size: 15px;
+        font-weight: 900;
+      }
+    }
+  }
+}

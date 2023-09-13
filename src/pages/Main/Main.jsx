@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlinePlus } from 'react-icons/ai';
 import {
   BiCalendar,
   BiSolidUserCircle,
@@ -160,6 +161,16 @@ const Main = () => {
             <p>기타</p>
             <p>121,870원</p>
           </div>
+        </div>
+
+        <div
+          className="assetConnection"
+          onClick={() => {
+            navigate('/asset-connection');
+          }}
+        >
+          <p className="buttonTitle">계좌 · 카드 내역 불러오기</p>
+          <AiOutlinePlus />
         </div>
       </main>
     </div>
