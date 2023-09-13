@@ -211,5 +211,21 @@
         cursor: pointer;
       }
     }
+
+    .assetConnection {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      background-color: #9da2fc;
+      letter-spacing: -1px;
+      cursor: pointer;
+    }
   }
 }

@@ -42,7 +42,7 @@ const Join = () => {
 
   const onSuccessAuthCallback = data => {
     setUserAuth(true);
-    setUserInfo(prevState => ({ ...prevState, CI: data.CI }));
+    setUserInfo(prev => ({ ...prev, CI: data.CI }));
   };
 
   const authMutation = useAuthMutation(onSuccessAuthCallback);
