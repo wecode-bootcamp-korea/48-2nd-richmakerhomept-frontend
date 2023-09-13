@@ -9,6 +9,7 @@ import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './ChangeProfileImage.scss';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
+const profileImage = localStorage.getItem('profileImage');
 
 const ChangeProfileImage = () => {
   const navigate = useNavigate();
@@ -35,28 +36,34 @@ const ChangeProfileImage = () => {
     };
 
     try {
-      await axios.post(baseUrl, formData, { headers });
+      await axios.post(`${baseUrl}/user/profileimage`, formData, { headers });
     } catch (err) {
       console.log(`ERROR: ${err}`);
     }
   };
+  //onSuccess에서 url 저장... localstorage.setItem('profileImage');
 
   const handleSubmitImage = () => {
     onSubmitChange();
-    navigate('/main');
+    // navigate('/main');
   };
 
-  const { isLoading, data, isError } = useGetProfileImage();
+  // const { isLoading, data, isError } = useGetProfileImage();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error...</div>;
+  // if (isLoading) return <div>Loading...</div>;
+  // if (isError) return <div>Error...</div>;
 
   // console.log(data);
 
   return (
     <>
       <div className="avatar">
-        <AiOutlineUser className="profileImage" />
+        {profileImage === 'null' ? (
+          <AiOutlineUser className="profileImage" />
+        ) : (
+          <img src={profileImage} alt="프로필" />
+        )}
+
         <span className="editBox">
           <MdModeEditOutline size={30} className="editBtn" />
           <p>변경</p>

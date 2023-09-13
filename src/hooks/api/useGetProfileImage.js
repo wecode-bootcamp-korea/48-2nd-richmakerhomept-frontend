@@ -4,7 +4,7 @@ import axios from 'axios';
 const getProfileImage = async () => {
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
-  return await axios.get(baseUrl);
+  return await axios.get(`${baseUrl}/user/profileimage`);
 };
 
 export const useGetProfileImage = () => {
