@@ -20,6 +20,8 @@ import GroupAccountList from './pages/GroupManagement/pages/GroupAccountList/Gro
 import GroupCardList from './pages/GroupManagement/pages/GroupCardList/GroupCardList';
 import AddAccount from './pages/GroupManagement/pages/AddAccount/AddAccount';
 import GroupTotalPriceDetail from './pages/GroupManagement/pages/GroupTotalPriceDetail/GroupTotalPriceDetail';
+import AccountDetail from './pages/GroupManagement/pages/AccountDetail/AccountDetail';
+import CardDetail from './pages/GroupManagement/pages/CardDetail/CardDetail';
 
 const Router = () => {
   return (
@@ -92,6 +94,8 @@ const Router = () => {
         <Route path="/group/card" element={<GroupCardList />} />
         <Route path="/group/add-account" element={<AddAccount />} />
         <Route path="/group/use" element={<GroupTotalPriceDetail />} />
+        <Route path="/group/account/:id" element={<AccountDetail />} />
+        <Route path="/group/card/:id" element={<CardDetail />} />
       </Routes>
     </BrowserRouter>
   );

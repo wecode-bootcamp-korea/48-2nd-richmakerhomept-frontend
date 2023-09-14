@@ -29,7 +29,6 @@ const ChangePassword = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    // navigate('/main');
 
     try {
       const res = await axios.post(
@@ -42,8 +41,6 @@ const ChangePassword = () => {
         },
       );
 
-      console.log(res);
-
       if (res.data.message === 'changePassword') {
         navigate('/main');
       }
@@ -55,6 +52,8 @@ const ChangePassword = () => {
       if (res.data.message === 'invalid password') {
         alert('기존 비밀번호를 확인해주세요');
       }
+
+      alert('비밀번호가 변경되었습니다.');
     } catch (err) {
       console.log(`ERROR : ${err}`);
     }
