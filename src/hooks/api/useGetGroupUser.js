@@ -10,5 +10,5 @@ const getGroupUsers = async () => {
 export const useGetGroupUsers = () => {
   const { data, isError, isLoading } = useQuery(['groupUsers'], getGroupUsers);
 
-  return { data: data?.data.userData, isError, isLoading };
+  return { data: data?.data.data, isError, isLoading };
 };
