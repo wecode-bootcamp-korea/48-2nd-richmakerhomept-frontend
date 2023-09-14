@@ -14,79 +14,77 @@
     }
   }
 
-  .announcementMessage {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  main {
     padding: 20px 0;
-    border-bottom: 1px solid $grey22;
-
-    h5 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #444444;
-      .highlight {
-        color: $purple;
-        font-size: 17px;
-        font-weight: 900;
-      }
-    }
-  }
-
-  .categories {
-    display: flex;
-    padding: 10px 0 0 0;
-
-    .categoryButton {
-      border: 1px solid #ffffff;
-      border-bottom: 2px solid #ffffff;
-      background-color: #ffffff;
-      color: $grey60;
-      font-size: 16px;
-      letter-spacing: -1px;
-      cursor: pointer;
-
-      &.bold {
-        font-weight: 900;
-        border-bottom: 2px solid $purple;
-        color: #444444;
-      }
-    }
-  }
-
-  .assetList {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0;
-
-    .assetItem {
-      width: 100%;
-      padding: 10px 20px;
-      border: 1px solid $grey22;
-      border-radius: 20px;
+    .announcementMessage {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      margin-top: 15px;
+      flex-direction: column;
+      gap: 5px;
+      border-bottom: 1px solid $grey22;
 
-      .assetImage {
-        width: 60px;
-        height: 33px;
+      h5 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #444444;
+        .highlight {
+          color: $purple;
+          font-size: 17px;
+          font-weight: 900;
+        }
       }
-      .assetName {
-        font-size: 12px;
-        font-weight: 900;
-        border-left: 2px solid $grey22;
-        border-right: 2px solid $grey22;
-        padding-left: 10px;
-        padding-right: 10px;
+    }
+
+    .categories {
+      display: flex;
+      padding: 20px 0 0;
+
+      .categoryButton {
+        border: 1px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+        background-color: #ffffff;
+        color: $grey60;
+        font-size: 16px;
+        letter-spacing: -1px;
+        cursor: pointer;
+
+        &.bold {
+          font-weight: 900;
+          border-bottom: 2px solid $purple;
+          color: #444444;
+        }
       }
-      .assetNumber {
-        padding-left: 10px;
-        font-size: 15px;
-        font-weight: 900;
+    }
+
+    .assetList {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5%;
+      padding: 20px 0;
+
+      .assetItem {
+        width: 30%;
+        padding: 15px 0;
+        border: 1px solid $grey22;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-top: 15px;
+        &.selected {
+          border: 1px solid $purple;
+        }
+
+        .assetImage {
+          width: 60px;
+        }
+        .assetName {
+          font-size: 13px;
+          font-weight: 900;
+        }
       }
     }
   }
