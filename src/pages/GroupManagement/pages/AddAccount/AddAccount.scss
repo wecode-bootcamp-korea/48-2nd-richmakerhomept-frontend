@@ -51,32 +51,37 @@
     font-size: 14px;
     font-weight: bold;
 
-    .checkIcon {
-      color: $grey80;
-      border-radius: 50%;
-      transition: all 0.3s ease;
+    // .checkIcon {
+    //   color: $grey80;
+    //   border-radius: 50%;
+    //   transition: all 0.3s ease;
 
-      &:hover {
-        background-color: $blue;
-        color: #fff;
-        cursor: pointer;
-      }
-    }
+    //   &:hover {
+    //     background-color: $blue;
+    //     color: #fff;
+    //     cursor: pointer;
+    //   }
+
+    //   &.checked {
+    //     background-color: $blue;
+    //     color: #fff;
+    //     cursor: pointer;
+    //   }
+    // }
   }
 
   .detailContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
 
     .detailHeader {
       border-bottom: 1px solid $grey22;
       padding-bottom: 20px;
-
-      &:last-of-type {
-        padding-top: 50px;
-      }
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
       p {
         font-weight: bold;
@@ -89,6 +94,7 @@
       flex-direction: column;
       gap: 15px;
       padding-top: 20px;
+      margin-bottom: 50px;
 
       .detailItem {
         display: flex;
@@ -117,6 +123,12 @@
           transition: all 0.3s ease;
 
           &:hover {
+            background-color: $blue;
+            color: #fff;
+            cursor: pointer;
+          }
+
+          &.checked {
             background-color: $blue;
             color: #fff;
             cursor: pointer;
