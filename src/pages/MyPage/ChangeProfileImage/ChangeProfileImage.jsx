@@ -4,16 +4,16 @@ import axios from 'axios';
 import { AiOutlineUser } from 'react-icons/ai';
 import { MdModeEditOutline } from 'react-icons/md';
 import { config } from '../../../utils/constant';
-import { useGetProfileImage } from '../../../hooks/api/useGetProfileImage';
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './ChangeProfileImage.scss';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
-const profileImage = localStorage.getItem('profileImage');
 
 const ChangeProfileImage = () => {
-  const navigate = useNavigate();
   const [file, setFile] = useState();
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    localStorage.getItem('profileImage') || '',
+  );
 
   const onChangeImageInput = async e => {
     e.preventDefault();
@@ -23,6 +23,7 @@ const ChangeProfileImage = () => {
     if (files) {
       formData.append('profileImage', files[0]);
       setFile(files[0]);
+      setProfileImageUrl(URL.createObjectURL(files[0]));
     }
   };
 
@@ -36,32 +37,27 @@ const ChangeProfileImage = () => {
     };
 
     try {
-      await axios.post(`${baseUrl}/user/profileimage`, formData, { headers });
+      const response = await axios.post(
+        `${baseUrl}/user/profileimage`,
+        formData,
+        { headers },
+      );
+      const imageUrl = response.data.profileImage;
+      setProfileImageUrl(imageUrl);
+      localStorage.setItem('profileImage', imageUrl);
+      alert('프로필이 변경되었습니다.');
     } catch (err) {
       console.log(`ERROR: ${err}`);
     }
   };
-  //onSuccess에서 url 저장... localstorage.setItem('profileImage');
-
-  const handleSubmitImage = () => {
-    onSubmitChange();
-    // navigate('/main');
-  };
-
-  // const { isLoading, data, isError } = useGetProfileImage();
-
-  // if (isLoading) return <div>Loading...</div>;
-  // if (isError) return <div>Error...</div>;
-
-  // console.log(data);
 
   return (
     <>
       <div className="avatar">
-        {profileImage === 'null' ? (
-          <AiOutlineUser className="profileImage" />
+        {profileImageUrl ? (
+          <img src={profileImageUrl} alt="프로필" className="profileImage" />
         ) : (
-          <img src={profileImage} alt="프로필" />
+          <AiOutlineUser className="profileImage" />
         )}
 
         <span className="editBox">
@@ -77,7 +73,7 @@ const ChangeProfileImage = () => {
         </span>
       </div>
 
-      <DefaultButton text="저장" onClick={handleSubmitImage} />
+      <DefaultButton text="저장" onClick={onSubmitChange} />
     </>
   );
 };

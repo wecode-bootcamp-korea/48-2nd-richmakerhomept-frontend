@@ -50,7 +50,9 @@ const MyPage = () => {
           비밀번호 변경
         </button>
       </div>
-      {isProfileBold ? <ChangeProfileImage /> : <ChangePassword />}
+      <div className="myPageContentBox">
+        {isProfileBold ? <ChangeProfileImage /> : <ChangePassword />}
+      </div>
     </div>
   );
 };
