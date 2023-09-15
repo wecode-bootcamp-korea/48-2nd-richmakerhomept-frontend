@@ -8,7 +8,7 @@ const AddUser = () => {
   const [isOpenStartGroupModal, setIsOpenStartGroupModal] = useState(false);
 
   const closeModal = () => {
-    if (isOpenStartGroupModal === true) return setIsOpenStartGroupModal(false);
+    setIsOpenStartGroupModal(false);
   };
 
   const handleOpenModal = () => {

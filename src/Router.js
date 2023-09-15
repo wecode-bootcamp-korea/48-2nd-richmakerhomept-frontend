@@ -22,6 +22,7 @@ import AddAccount from './pages/GroupManagement/pages/AddAccount/AddAccount';
 import GroupTotalPriceDetail from './pages/GroupManagement/pages/GroupTotalPriceDetail/GroupTotalPriceDetail';
 import AccountDetail from './pages/GroupManagement/pages/AccountDetail/AccountDetail';
 import CardDetail from './pages/GroupManagement/pages/CardDetail/CardDetail';
+import Chart from './pages/Chart';
 
 const Router = () => {
   return (
@@ -96,6 +97,7 @@ const Router = () => {
         <Route path="/group/use" element={<GroupTotalPriceDetail />} />
         <Route path="/group/account/:id" element={<AccountDetail />} />
         <Route path="/group/card/:id" element={<CardDetail />} />
+        <Route path="/chart" element={<Chart />} />
       </Routes>
     </BrowserRouter>
   );
