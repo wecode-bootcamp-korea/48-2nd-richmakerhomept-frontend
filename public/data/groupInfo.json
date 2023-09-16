@@ -1,0 +1,69 @@
+{
+  "data": {
+    "members": [
+      {
+        "id": 1,
+        "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M"
+      },
+      {
+        "id": 2,
+        "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M"
+      },
+      {
+        "id": 3,
+        "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M"
+      }
+    ],
+    "groupDay": 3,
+    "totalImportCount": 2,
+    "totalImportPrice": 100,
+    "totalPaymentCount": 5,
+    "totalPaymentPrice": 400,
+    "cards": [
+      {
+        "cardId": 1,
+        "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M",
+        "cardImage": "https://wp-blog.toss.im/wp-content/uploads/2022/09/logo-toss-blue-1024x576.png",
+        "cardName": "토스뱅크카드",
+        "amount": 2500
+      },
+      {
+        "cardId": 2,
+        "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M",
+        "cardImage": "https://wp-blog.toss.im/wp-content/uploads/2022/09/logo-toss-blue-1024x576.png",
+        "cardName": "신한카드",
+        "amount": 5500
+      },
+      {
+        "cardId": 3,
+        "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M",
+        "cardImage": "https://wp-blog.toss.im/wp-content/uploads/2022/09/logo-toss-blue-1024x576.png",
+        "cardName": "IBK기업은행카드",
+        "amount": 21500
+      }
+    ],
+    "accounts": [
+      {
+        "accountId": 1,
+        "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M",
+        "accountImage": "https://wp-blog.toss.im/wp-content/uploads/2022/09/logo-toss-blue-1024x576.png",
+        "accountName": "토스뱅크계좌",
+        "amount": 212500
+      },
+      {
+        "accountId": 2,
+        "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M",
+        "accountImage": "https://wp-blog.toss.im/wp-content/uploads/2022/09/logo-toss-blue-1024x576.png",
+        "accountName": "신한계좌",
+        "amount": 251500
+      },
+      {
+        "accountId": 3,
+        "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M",
+        "accountImage": "https://wp-blog.toss.im/wp-content/uploads/2022/09/logo-toss-blue-1024x576.png",
+        "accountName": "IBK기업은행계좌",
+        "amount": 23500
+      }
+    ]
+  }
+}

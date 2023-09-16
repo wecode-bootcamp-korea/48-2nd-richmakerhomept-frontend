@@ -5,12 +5,14 @@ import axios from 'axios';
 import DefaultButton from '../../../../components/DefaultButton/DefaultButton';
 import { useGetCardsAndAccounts } from '../../../../hooks/api/group/useGetAccountAndCardList';
 import './AddAccount.scss';
+import { useNavigate } from 'react-router-dom';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const AddAccount = () => {
   const [checkedCardList, setCheckedCardList] = useState([]);
   const [checkedAccountList, setCheckedAccountList] = useState([]);
+  const navigate = useNavigate();
   const numCardChecked = checkedCardList.length;
   const numAccountChecked = checkedAccountList.length;
 
@@ -94,7 +96,11 @@ const AddAccount = () => {
     <div className="addAccountContainer">
       <div className="header">
         <div className="closeBtnBox">
-          <AiOutlineClose size={24} className="closeBtn" />
+          <AiOutlineClose
+            size={24}
+            className="closeBtn"
+            onClick={() => navigate('/group')}
+          />
         </div>
         <div className="title">
           <h2>내 공유 데이터 설정</h2>

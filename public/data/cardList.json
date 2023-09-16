@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "accountId": 1,
+      "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M",
+      "accountImage": "https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/busanBank_PNG.png",
+      "accountName": "부산은행 계좌",
+      "rest": "2200"
+    },
+    {
+      "accountId": 2,
+      "profileImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
+      "accountImage": "https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/busanBank_PNG.png",
+      "accountName": "부산은행 계좌",
+      "rest": "2500"
+    },
+    {
+      "accountId": 3,
+      "profileImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
+      "accountImage": "https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/busanBank_PNG.png",
+      "accountName": "부산은행 계좌",
+      "rest": "2500"
+    }
+  ]
+}

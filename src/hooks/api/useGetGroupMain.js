@@ -4,11 +4,11 @@ import axios from 'axios';
 const getGroupInfos = async () => {
   // const baseUrl = process.env.REACT_APP_BASE_URL;
 
-  return await axios.get('https://jsonplaceholder.typicode.com/posts/1');
+  return await axios.get('/data/groupInfo.json');
 };
 
-export const useGetGroupManagement = () => {
+export const useGetGroupMain = () => {
   const { data, isError, isLoading } = useQuery(['groupInfos'], getGroupInfos);
 
-  return { data: data?.data, isError, isLoading };
+  return { data: data?.data.data, isError, isLoading };
 };

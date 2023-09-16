@@ -128,13 +128,12 @@
 
       .detailContent {
         display: flex;
-        align-items: center;
-        grid-area: 10px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
 
         .title {
-        }
-
-        .price {
+          font-size: 14px;
         }
       }
     }
