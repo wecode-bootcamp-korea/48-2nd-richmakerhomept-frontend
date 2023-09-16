@@ -1,10 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import './AccountDetail.scss';
 
 const AccountDetail = () => {
   const navigate = useNavigate();
+  const { accountId } = useParams();
 
   return (
     <div className="accountDetailContainer">

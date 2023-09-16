@@ -7,7 +7,7 @@ import './CardDetail.scss';
 const CardDetail = () => {
   const navigate = useNavigate();
 
-  const percentBar = Math.min(12, 105);
+  const percentBar = Math.min(12, 100);
 
   return (
     <div className="cardDetailContainer">
@@ -56,7 +56,7 @@ const CardDetail = () => {
           />
           <div className="detailContent">
             <p className="title">(주)이마트24 MV의왕</p>
-            <p className="price">2,200원</p>
+            <p>2,200원</p>
           </div>
         </div>
       </div>

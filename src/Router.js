@@ -95,7 +95,7 @@ const Router = () => {
         <Route path="/group/card" element={<GroupCardList />} />
         <Route path="/group/add-account" element={<AddAccount />} />
         <Route path="/group/use" element={<GroupTotalPriceDetail />} />
-        <Route path="/group/account/:id" element={<AccountDetail />} />
+        <Route path="/group/account/:accountId" element={<AccountDetail />} />
         <Route path="/group/card/:id" element={<CardDetail />} />
         <Route path="/chart" element={<Chart />} />
       </Routes>

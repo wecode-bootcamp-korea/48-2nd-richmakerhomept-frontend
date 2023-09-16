@@ -13,6 +13,7 @@
     gap: 10px;
     border-bottom: 1px solid $grey22;
     padding-bottom: 20px;
+    cursor: pointer;
 
     .title {
       font-size: 20px;
@@ -27,37 +28,46 @@
     }
   }
 
-  .accountListBox {
+  .assetListBox {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
 
-    .accountListContainer {
+    .assetListContainer {
       position: relative;
       width: 100%;
       display: flex;
       align-items: center;
-      gap: 60px;
+      gap: 10px;
       padding-top: 20px;
+      cursor: pointer;
 
       .userPofileImage {
         width: 30px;
+        height: 30px;
         border-radius: 50%;
       }
 
-      .accountImage {
-        position: absolute;
-        top: 24px;
-        left: 40px;
-        width: 100px;
-        height: 20px;
-        clip: rect(0, 42px, 30px, 0);
+      .accountImage,
+      .cardImage {
+        width: 50px;
+        height: 30px;
       }
 
-      .accountName {
-        font-size: 12px;
-        font-weight: bold;
+      .accountItemBox {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .accountName {
+          font-size: 13px;
+        }
+
+        .price {
+          font-size: 14px;
+          font-weight: bold;
+        }
       }
     }
 

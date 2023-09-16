@@ -92,20 +92,7 @@
     .accountItemContainer {
       display: flex;
       flex-direction: column;
-
-      .accountTitleHeader {
-        width: 90%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 20px;
-        margin: 0 auto 20px;
-        font-size: 14px;
-
-        .price {
-          font-size: 18px;
-        }
-      }
+      padding-top: 24px;
 
       .accountList {
         position: relative;
@@ -135,6 +122,7 @@
 
         .profile {
           width: 25px;
+          height: 25px;
           border-radius: 50%;
         }
       }

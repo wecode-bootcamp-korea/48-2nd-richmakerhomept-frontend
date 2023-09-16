@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { GROUP_CARD_TABS } from '../../../../utils/constant';
+import { useGetAccounts } from '../../../../hooks/api/group/useGetAccountList';
 import './GroupAccountList.scss';
 
 const GroupAccountList = () => {
@@ -10,6 +11,8 @@ const GroupAccountList = () => {
 
   const [activeTabIndex, setActiveTabIndex] = useState(1);
   const navigate = useNavigate();
+
+  const { isLoading, isError, data: accountList } = useGetAccounts();
 
   const handleTabClick = id => {
     setActiveTabIndex(id);
@@ -41,36 +44,32 @@ const GroupAccountList = () => {
       <div className="totalAccountPriceContainer">
         <div className="totalAccountPriceContentContainer">
           <div className="header">
-            <p>월 카드 이용료 합계</p>
+            <p>잔고 합계</p>
             <p>
-              <b className="price">0</b>원
+              <b className="price">20,000</b>원
             </p>
           </div>
           <div className="accountItemContainer">
-            <div className="accountTitleHeader">
-              <p>IBK 기업은행카드</p>
-              <p>
-                <b className="price">0</b>원
-              </p>
-            </div>
-            <div className="accountList">
-              <img
-                src="https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/lotteCard_PNG.png"
-                alt="카드"
-                className="account"
-              />
-              <div className="accountTitleBox">
-                <p>그린체크카드</p>
-                <span className="price">0원</span>
+            {accountList?.map(account => (
+              <div className="accountList" key={account.accountId}>
+                <img
+                  src={account.accountImage}
+                  alt="카드"
+                  className="account"
+                />
+                <div className="accountTitleBox">
+                  <p>{account.accountName}</p>
+                  <span className="price">{account.price}원</span>
+                </div>
+                <img
+                  src={account.profileImage}
+                  alt="프로필"
+                  className="profile"
+                />
               </div>
-              <img
-                src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M"
-                alt="프로필"
-                className="profile"
-              />
-            </div>
+            ))}
 
-            <div className="accountList">
+            {/* <div className="accountList">
               <img
                 src="https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/lotteCard_PNG.png"
                 alt="카드"
@@ -85,7 +84,7 @@ const GroupAccountList = () => {
                 alt="프로필"
                 className="profile"
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
