@@ -22,7 +22,7 @@ import AddAccount from './pages/GroupManagement/pages/AddAccount/AddAccount';
 import GroupTotalPriceDetail from './pages/GroupManagement/pages/GroupTotalPriceDetail/GroupTotalPriceDetail';
 import AccountDetail from './pages/GroupManagement/pages/AccountDetail/AccountDetail';
 import CardDetail from './pages/GroupManagement/pages/CardDetail/CardDetail';
-import Chart from './pages/Chart';
+import Chart from './pages/Main/components/Chart';
 
 const Router = () => {
   return (
@@ -97,7 +97,7 @@ const Router = () => {
         <Route path="/group/use" element={<GroupTotalPriceDetail />} />
         <Route path="/group/account/:accountId" element={<AccountDetail />} />
         <Route path="/group/card/:id" element={<CardDetail />} />
-        <Route path="/chart" element={<Chart />} />
+        <Route path="/main/my-report/chart" element={<Chart />} />
       </Routes>
     </BrowserRouter>
   );
