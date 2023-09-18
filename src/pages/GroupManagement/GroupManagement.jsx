@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GrFormAdd } from 'react-icons/gr';
 import { useGetGroupMain } from '../../hooks/api/useGetGroupMain';
+import Loading from '../../components/Loading/Loading';
 import InviteModal from '../AddUser/components/InviteModal';
 import ContainerBox from './components/ContainerBox';
 import GroupNoAccount from './components/GroupNoAccount';
@@ -21,10 +22,9 @@ const GroupManagement = () => {
 
   const closeModal = () => setIsOpenAddUserModal(false);
 
-  const { isLoading, data: mainData, isError } = useGetGroupMain();
+  const { isLoading, data: mainData } = useGetGroupMain();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error...</div>;
+  if (isLoading) return <Loading />;
 
   const {
     members,
