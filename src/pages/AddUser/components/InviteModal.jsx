@@ -7,7 +7,7 @@ const InviteModal = ({ closeModal }) => {
     <div className="inviteModalBackGround" onClick={closeModal}>
       <div className="inviteModal" onClick={e => e.stopPropagation()}>
         <p className="title">연결 방식</p>
-        <InviteWithPhoneNumber />
+        <InviteWithPhoneNumber closeModal={closeModal} />
       </div>
     </div>
   );

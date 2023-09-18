@@ -1,18 +1,43 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
-import { GROUP_CARD_TABS } from '../../../../utils/constant';
+import { useGetGroupAssets } from '../../../../hooks/api/group/useGetAccountList';
+import Loading from '../../../../components/Loading/Loading';
 import './GroupCardList.scss';
 
 const GroupCardList = () => {
   // 탭별 화면은 쿼리스트링으로
 
-  const [activeTabIndex, setActiveTabIndex] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const assets = searchParams.get('type');
+  const memberIdParam = searchParams.get('memberId');
+  const memberId = parseInt(memberIdParam);
+
+  const [activeTab, setActiveTab] = useState('공동');
   const navigate = useNavigate();
 
-  const handleTabClick = id => {
-    setActiveTabIndex(id);
+  const { isLoading, data: cardList } = useGetGroupAssets(assets, memberId);
+
+  console.log(cardList);
+
+  const handleTabClick = (tabName, tabUserId) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    if (tabName) {
+      setActiveTab(tabName);
+      newSearchParams.set('type', assets);
+      newSearchParams.set('memberId', tabUserId);
+    } else {
+      setActiveTab('공동');
+      newSearchParams.set('type', assets);
+      newSearchParams.delete('memberId');
+    }
+
+    setSearchParams(newSearchParams);
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="cardListContainer">
@@ -26,13 +51,13 @@ const GroupCardList = () => {
           <h1 className="title">카드</h1>
         </div>
         <div className="groupUser">
-          {GROUP_CARD_TABS.map(tab => (
+          {cardList.members.map(tab => (
             <button
-              key={tab.id}
-              className={`groupTab ${activeTabIndex === tab.id ? 'bold' : ''}`}
-              onClick={() => handleTabClick(tab.id)}
+              key={tab.userId}
+              className={`groupTab ${activeTab === tab.userName ? 'bold' : ''}`}
+              onClick={() => handleTabClick(tab.userName, tab.userId)}
             >
-              {tab.label}
+              {tab.userName}
             </button>
           ))}
         </div>
@@ -46,45 +71,33 @@ const GroupCardList = () => {
             </p>
           </div>
           <div className="cardItemContainer">
-            <div className="cardTitleHeader">
-              <p>IBK 기업은행카드</p>
-              <p>
-                <b className="price">0</b>원
-              </p>
-            </div>
-            <div className="cardList">
-              <img
-                src="https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/lotteCard_PNG.png"
-                alt="카드"
-                className="card"
-              />
-              <div className="cardTitleBox">
-                <p>그린체크카드</p>
-                <span className="price">0원</span>
-              </div>
-              <img
-                src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M"
-                alt="프로필"
-                className="profile"
-              />
-            </div>
+            {cardList.info.map((card, i) => (
+              <div className="accountItemBox" key={i}>
+                <div className="cardTitleHeader" key={i}>
+                  <p>{card.providerName}</p>
+                  <p>
+                    <b className="price">{card.total}</b>원
+                  </p>
+                </div>
 
-            <div className="cardList">
-              <img
-                src="https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/lotteCard_PNG.png"
-                alt="카드"
-                className="card"
-              />
-              <div className="cardTitleBox">
-                <p>그린체크카드</p>
-                <span className="price">0원</span>
+                {card.finances.map((finance, i) => (
+                  <div className="cardList" key={i}>
+                    <img src={card.providerImage} alt="카드" className="card" />
+                    <div className="cardTitleBox">
+                      <p>{finance.financeNumber}</p>
+                      <span className="price">
+                        {Number(finance.sum).toLocaleString()}원
+                      </span>
+                    </div>
+                    <img
+                      src={finance.userProfile}
+                      alt="프로필"
+                      className="profile"
+                    />
+                  </div>
+                ))}
               </div>
-              <img
-                src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M"
-                alt="프로필"
-                className="profile"
-              />
-            </div>
+            ))}
           </div>
         </div>
       </div>

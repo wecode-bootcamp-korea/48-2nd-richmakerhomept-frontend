@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CiUser } from 'react-icons/ci';
+import { useMutation } from '@tanstack/react-query';
 import { phoneNumberPattern } from '../../../utils/constant';
 import DefaultInput from '../../../components/DefaultInput/DefaultInput';
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
-import usePostPhoneNumberMutation from '../../../hooks/api/user/usePostPhoneNumberMutation';
+import axios from 'axios';
 import './PhoneNumberInput.scss';
 
-const PhoneNumberInput = () => {
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
+const PhoneNumberInput = ({ closeModal }) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState('');
+  const navigate = useNavigate();
+
   const phoneNumberIsValid = phoneNumberPattern.test(userPhoneNumber);
-  const postPhoneNumberMutation = usePostPhoneNumberMutation();
 
   const handleInputChange = e => {
     const inputValue = e.target.value;
@@ -20,12 +25,49 @@ const PhoneNumberInput = () => {
     setUserPhoneNumber(onlyNumber);
   };
 
-  const handlePostPhoneNumber = async () => {
+  const addUserMutation = useMutation(
+    async phoneNumber => {
+      const response = await axios.post(
+        `${baseUrl}/group/invitation`,
+        {
+          receiverPhoneNumber: phoneNumber,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem('accessToken'),
+          },
+        },
+      );
+      return response.data;
+    },
+    {
+      onSuccess: data => {
+        const { message } = data;
+        if (message === 'invitation sent and added member') {
+          alert('성공했습니다');
+          closeModal();
+          navigate('/group');
+        } else if (message === 'Exceeds maximum member count: 5') {
+          alert('최대 회원 수를 초과');
+        } else if (message === 'Phone number not found') {
+          alert('없는 번호입니다');
+        } else if (message === 'same group') {
+          alert('같은 그룹입니다.');
+        }
+      },
+      onError: () => {
+        alert('에러가 발생했습니다');
+      },
+    },
+  );
+
+  const handlePostPhoneNumber = () => {
     if (phoneNumberIsValid) {
-      await postPhoneNumberMutation.mutateAsync(userPhoneNumber);
+      addUserMutation.mutate(userPhoneNumber);
+    } else {
+      alert('유효하지 않은 전화번호입니다');
     }
   };
-
   return (
     <div className="phoneNumberInputContainer">
       <DefaultInput

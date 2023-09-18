@@ -3,7 +3,7 @@ import { BsPhone } from 'react-icons/bs';
 import PhoneNumberInput from './PhoneNumberInput';
 import './InviteWithPhoneNumber.scss';
 
-const InviteWithPhoneNumber = () => {
+const InviteWithPhoneNumber = ({ closeModal }) => {
   const [isOpenPhoneNumberInput, setIsOpenPhoneNumberInput] = useState(false);
 
   const handleClickToSwitch = () => {
@@ -18,7 +18,7 @@ const InviteWithPhoneNumber = () => {
           <h1 className="inviteMethod">핸드폰 번호</h1>
         </div>
       ) : (
-        <PhoneNumberInput />
+        <PhoneNumberInput closeModal={closeModal} />
       )}
     </div>
   );

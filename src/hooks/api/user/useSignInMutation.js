@@ -9,6 +9,8 @@ const useSignInMutation = (onSuccessCallback, onErrorCallback) => {
         localStorage.setItem('userName', data.data.userName);
         localStorage.setItem('phoneNumber', data.data.phoneNumber);
         localStorage.setItem('profileImage', data.data.profileImage);
+        localStorage.setItem('id', data.data.id);
+        localStorage.setItem('groupId', data.data.grouping_id);
         localStorage.removeItem('userPhoneNumber');
         onSuccessCallback();
       } else {

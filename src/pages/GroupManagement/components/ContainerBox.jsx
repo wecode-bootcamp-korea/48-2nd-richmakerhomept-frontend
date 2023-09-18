@@ -1,55 +1,80 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '../../../utils/constant';
 import './ContainerBox.scss';
 
-const ContainerBox = ({ title, count, assets, assetType, onClick }) => {
+const ContainerBox = ({ title, count, assets, assetType }) => {
   const navigate = useNavigate();
 
   const assetListLength = assets ? assets.length : 0;
   const visibleAssets = assetListLength > 2 ? assets.slice(0, 2) : assets;
 
-  const goToDetailAsset = assetId => {
-    const basePath = assetType === 'card' ? '/group/card' : '/group/account';
-    navigate(`${basePath}/${assetId}`);
+  const goToDetailAsset = (financeId, year, month) => {
+    const basePath = `/group/finance/detail/${
+      assetType === 'b' ? 'account' : 'card'
+    }`;
+    const urlParams =
+      assetType === 'b'
+        ? `financeId=${financeId}`
+        : `financeId=${financeId}&yearValue=${year}&monthValue=${month}`;
+    navigate(`${basePath}?${urlParams}`);
   };
 
   return (
     <div className="container">
-      <div className="boxHeader" onClick={() => navigate('/group/account')}>
+      <div
+        className="boxHeader"
+        onClick={() =>
+          navigate(
+            `/group/${
+              assetType === 'b' ? 'account' : 'card'
+            }?type='${assetType}'`,
+          )
+        }
+      >
         <h1 className="title">{title}</h1>
-        <p className="count">{count}</p>
+        <p className="count">{formatPrice(count)}</p>
       </div>
       <div className="assetListBox">
         {visibleAssets?.map(asset => (
           <div
             className="assetListContainer"
-            key={asset.accountId || asset.cardId}
-            onClick={() => goToDetailAsset(asset.accountId || asset.cardId)}
+            key={asset.financeId}
+            onClick={() => {
+              goToDetailAsset(asset.financeId);
+            }}
           >
             <img
               className="userPofileImage"
-              src={asset.profileImage}
+              src={asset.userImage}
               alt="프로필"
             />
             {assetType === 'account' ? (
               <img
                 className="accountImage"
-                src={asset.accountImage}
+                src={asset.providerImage}
                 alt="은행"
               />
             ) : (
-              <img className="cardImage" src={asset.cardImage} alt="카드" />
+              <img className="cardImage" src={asset.providerImage} alt="카드" />
             )}
             <div className="accountItemBox">
-              <p className="accountName">
-                {asset.accountName || asset.cardName}
-              </p>
-              <p className="price">{asset.amount}원</p>
+              <p className="accountName">{asset.providerName}</p>
+              <p className="price">{formatPrice(asset.amount)}원</p>
             </div>
           </div>
         ))}
         {assetListLength > 2 && (
-          <button className="moreAccount" onClick={onClick}>
+          <button
+            className="moreAccount"
+            onClick={() =>
+              navigate(
+                `/group/${
+                  assetType === 'b' ? 'account' : 'card'
+                }?type='${assetType}'`,
+              )
+            }
+          >
             더보기
           </button>
         )}

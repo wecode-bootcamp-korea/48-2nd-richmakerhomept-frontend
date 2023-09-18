@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
+import CalendarModal from '../../../../components/CalendarModal/CalendarModal';
 import { formatDate } from '../../../../utils/constant';
 import './CardDetail.scss';
-import CalendarModal from '../../../../components/CalendarModal/CalendarModal';
 
 const CardDetail = () => {
   const navigate = useNavigate();

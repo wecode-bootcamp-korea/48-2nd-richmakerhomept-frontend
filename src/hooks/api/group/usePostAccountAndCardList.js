@@ -8,7 +8,6 @@ const postCardsAndAccounts = async selectItems => {
     const response = await axios.post(`${baseUrl}/finance`, {
       selectItems,
     });
-    console.log(response);
   } catch (error) {
     console.log(error);
   }

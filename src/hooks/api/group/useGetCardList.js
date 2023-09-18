@@ -1,11 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const getCards = async () => {
-  // const baseUrl = process.env.REACT_APP_BASE_URL;
+const getCards = async type => {
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const accessToken = localStorage.getItem('accessToken');
 
-  return await axios.get('/data/cardList.json');
+  return await axios.get(`${baseUrl}/group/finance?type='${type}'`, {
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `${accessToken}`,
+    },
+  });
 };
 
 export const useGetCards = () => {

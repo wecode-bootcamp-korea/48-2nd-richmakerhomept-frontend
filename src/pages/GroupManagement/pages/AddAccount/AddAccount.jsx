@@ -5,10 +5,11 @@ import { AiOutlineClose } from 'react-icons/ai';
 import axios from 'axios';
 import DefaultButton from '../../../../components/DefaultButton/DefaultButton';
 import Loading from '../../../../components/Loading/Loading';
-import { useGetCardsAndAccounts } from '../../../../hooks/api/group/useGetAccountAndCardList';
+import { useGetGroupFinanceList } from '../../../../hooks/api/group/myAssets';
 import './AddAccount.scss';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
+const accessToken = localStorage.getItem('accessToken');
 
 const AddAccount = () => {
   const [checkedCardList, setCheckedCardList] = useState([]);
@@ -17,11 +18,45 @@ const AddAccount = () => {
   const numCardChecked = checkedCardList.length;
   const numAccountChecked = checkedAccountList.length;
 
-  const { isLoading, data: accountsAndCardsData } = useGetCardsAndAccounts();
+  const { isLoading, data: accountsAndCardsData } = useGetGroupFinanceList();
+
+  const cards = accountsAndCardsData?.cards || [];
+  const banks = accountsAndCardsData?.banks || [];
+
+  const handleShare = () => {
+    const isAll =
+      numCardChecked === cards.length && numAccountChecked === banks.length;
+    const financeId = [...checkedCardList, ...checkedAccountList];
+
+    mutation.mutate({ isAll, financeId });
+    // navigate('/group');
+  };
+
+  const mutation = useMutation(async ({ isAll, financeId }) => {
+    try {
+      const response = await axios.patch(
+        `${baseUrl}/group/financeList`,
+        {
+          isAll,
+          financeId,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: `${accessToken}`,
+          },
+        },
+      );
+
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  });
 
   const handleCardsAllCheck = ({ target: { checked } }) => {
     if (checked) {
-      setCheckedCardList(accountsAndCardsData.cards.map(card => card.id));
+      setCheckedCardList(cards.map(card => card.financeId));
     } else {
       setCheckedCardList([]);
     }
@@ -29,9 +64,7 @@ const AddAccount = () => {
 
   const handleAccountsAllCheck = ({ target: { checked } }) => {
     if (checked) {
-      setCheckedAccountList(
-        accountsAndCardsData.accounts.map(account => account.id),
-      );
+      setCheckedAccountList(banks.map(account => account.financeId));
     } else {
       setCheckedAccountList([]);
     }
@@ -39,10 +72,8 @@ const AddAccount = () => {
 
   const totalAllCheck = ({ target: { checked } }) => {
     if (checked) {
-      setCheckedCardList(accountsAndCardsData.cards.map(card => card.id));
-      setCheckedAccountList(
-        accountsAndCardsData.accounts.map(account => account.id),
-      );
+      setCheckedCardList(cards.map(card => card.financeId));
+      setCheckedAccountList(banks.map(account => account.financeId));
     } else {
       setCheckedCardList([]);
       setCheckedAccountList([]);
@@ -61,32 +92,24 @@ const AddAccount = () => {
 
   const handleAccountOnChange = id => {
     const isChecked = checkedAccountList.includes(id);
-
     if (isChecked) {
       setCheckedAccountList(prev => prev.filter(el => el !== id));
     } else {
       setCheckedAccountList(prev => [...prev, id]);
     }
-  };
 
-  const handleShare = () => {
-    mutation.mutate();
+    // setCheckedAccountList(prev => {
+    //   if (prev.includes(id)) {
+    //     return prev.filter(existingItem => existingItem !== id);
+    //   } else {
+    //     return [...prev, id];
+    //   }
+    // });
   };
-
-  const sendSelectedItems = async selectedItems => {
-    try {
-      const response = await axios.post(`${baseUrl}`, {
-        selectedItems,
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const mutation = useMutation(sendSelectedItems);
 
   if (isLoading) return <Loading />;
+
+  // console.log(accountsAndCardsData);
 
   return (
     <div className="addAccountContainer">
@@ -111,60 +134,67 @@ const AddAccount = () => {
           id="checkAll"
           onChange={totalAllCheck}
           checked={
-            numCardChecked === accountsAndCardsData.cards.length &&
-            numAccountChecked === accountsAndCardsData.accounts.length
+            numCardChecked === cards?.length &&
+            numAccountChecked === banks.length
           }
         />
       </button>
 
       <div className="detailContainer">
-        <div className="detailHeader">
-          <p>카드</p>
-          <input
-            type="checkbox"
-            onChange={handleCardsAllCheck}
-            checked={numCardChecked === accountsAndCardsData.cards.length}
-          />
-        </div>
-        <ul className="detailList">
-          {accountsAndCardsData.cards.map(card => (
-            <li key={card.id} className="detailItem">
-              <div className="detailTitleBox">
-                <img src={card.cardImage} alt="카드" className="detailImage" />
-                <p className="detailTitle">{card.cardName}</p>
+        {cards &&
+          cards.map(card => (
+            <>
+              <div className="detailHeader">
+                <p>카드</p>
+                <input
+                  type="checkbox"
+                  onChange={handleCardsAllCheck}
+                  checked={numCardChecked === cards?.length}
+                />
               </div>
-              <input
-                type="checkbox"
-                onChange={() => handleCardOnChange(card.id)}
-                checked={checkedCardList.includes(card.id)}
-              />
-            </li>
+              <ul className="detailList">
+                <li key={card.id} className="detailItem">
+                  <div className="detailTitleBox">
+                    <img
+                      src={card.cardImage}
+                      alt="카드"
+                      className="detailImage"
+                    />
+                    <p className="detailTitle">{card.cardName}</p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    onChange={() => handleCardOnChange(card.financeId)}
+                    checked={checkedCardList.includes(card.financeId)}
+                  />
+                </li>
+              </ul>
+            </>
           ))}
-        </ul>
 
         <div className="detailHeader">
           <p>은행</p>
           <input
             type="checkbox"
             onChange={handleAccountsAllCheck}
-            checked={numAccountChecked === accountsAndCardsData.accounts.length}
+            checked={numAccountChecked === banks?.length}
           />
         </div>
         <ul className="detailList">
-          {accountsAndCardsData.accounts.map(account => (
-            <li key={account.id} className="detailItem">
+          {banks?.map(account => (
+            <li key={account.financeId} className="detailItem">
               <div className="detailTitleBox">
                 <img
-                  src={account.accountImage}
+                  src={account.providerImage}
                   alt="은행"
                   className="detailImage"
                 />
-                <p className="detailTitle">{account.accountName}</p>
+                <p className="detailTitle">{account.providerName}</p>
               </div>
               <input
                 type="checkbox"
-                onChange={() => handleAccountOnChange(account.id)}
-                checked={checkedAccountList.includes(account.id)}
+                onChange={() => handleAccountOnChange(account.financeId)}
+                checked={checkedAccountList.includes(account.financeId)}
               />
             </li>
           ))}

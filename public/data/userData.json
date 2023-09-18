@@ -17,6 +17,12 @@
       "profileImage": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
       "userName": "김만규",
       "sharedFinanceCount": "5"
+    },
+    {
+      "userId": 4,
+      "profileImage": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
+      "userName": "김만규",
+      "sharedFinanceCount": "5"
     }
   ]
 }
