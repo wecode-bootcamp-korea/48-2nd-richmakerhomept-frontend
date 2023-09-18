@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAccountData } from '../../hooks/api/userAccount/useAccountData';
 import { BiArrowBack } from 'react-icons/bi';
-import CardList from './Pages/CardList';
+import { useAccountData } from '../../hooks/api/userAccount/useAccountData';
 import DefaultButton from '../../components/DefaultButton/DefaultButton';
+import Loading from '../../components/Loading/Loading';
+import CardList from './Pages/CardList';
 import './AssetConnection.scss';
 
 const AssetConnection = () => {
@@ -15,21 +16,19 @@ const AssetConnection = () => {
   const [bankClick, setBankClick] = useState(false);
   const [selectedCards, setSelectedCards] = useState([]);
   const [selectedBanks, setSelectedBanks] = useState([]);
-  console.log(selectedCards);
-  console.log(selectedBanks);
 
-  const handleItemClick = (type, providerId) => {
+  const handleItemClick = (type, providerID) => {
     if (type === 'card') {
       setSelectedCards(prev =>
-        prev.includes(providerId)
-          ? prev.filter(item => item !== providerId)
-          : [...prev, providerId],
+        prev.includes(providerID)
+          ? prev.filter(item => item !== providerID)
+          : [...prev, providerID],
       );
     } else if (type === 'bank') {
       setSelectedBanks(prev =>
-        prev.includes(providerId)
-          ? prev.filter(item => item !== providerId)
-          : [...prev, providerId],
+        prev.includes(providerID)
+          ? prev.filter(item => item !== providerID)
+          : [...prev, providerID],
       );
     }
   };
@@ -40,16 +39,16 @@ const AssetConnection = () => {
     );
   };
 
-  const { data, isError } = useAccountData();
+  const { data, isError, isLoading, error } = useAccountData();
+
   useEffect(() => {
     if (data) {
-      console.log(data);
       setMyBanks(data.bank);
       setMyCards(data.card);
     } else if (isError) {
-      console.error('데이터 통신 실패');
+      console.error(`데이터 통신 실패 : (${error.message})`);
     } else {
-      console.log('통신 실패');
+      console.log('통신 재시도 중');
     }
   }, [data, isError]);
 
@@ -61,6 +60,8 @@ const AssetConnection = () => {
     setCardClick(false);
     setBankClick(true);
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="assetConnection">

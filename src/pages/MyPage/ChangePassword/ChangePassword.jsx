@@ -41,20 +41,16 @@ const ChangePassword = () => {
         },
       );
 
+      console.log(res, newPassword, newPasswordCheck);
+
       if (res.data.message === 'changePassword') {
         alert('비밀번호가 변경되었습니다.');
         navigate('/main');
       }
 
-      if (res.data.message === 'Incorrect current password') {
-        alert('기존 비밀번호를 확인해주세요.');
+      if (res.data.message === 'INVALID_PASSWORD') {
+        alert('비밀번호를 확인해주세요');
       }
-
-      if (res.data.message === 'invalid password') {
-        alert('기존 비밀번호를 확인해주세요');
-      }
-
-      alert('비밀번호가 변경되었습니다.');
     } catch (err) {
       console.log(`ERROR : ${err}`);
     }

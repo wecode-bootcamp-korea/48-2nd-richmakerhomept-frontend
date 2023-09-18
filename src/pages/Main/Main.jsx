@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlinePlus } from 'react-icons/ai';
 import {
@@ -6,7 +6,9 @@ import {
   BiSolidUserCircle,
   BiBell,
   BiBarChartAlt,
+  BiRefresh,
 } from 'react-icons/bi';
+import useFinancialData from '../../hooks/api/mainPageUser/useFinancialData';
 import './Main.scss';
 
 const accessToken = localStorage.getItem('accessToken');
@@ -14,6 +16,10 @@ const userName = localStorage.getItem('userName');
 
 const Main = () => {
   const navigate = useNavigate();
+
+  const [financialData, setFinancialData] = useState([]);
+  /** 통신 테스트용 콘솔로그*/
+  console.log(financialData);
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
@@ -23,12 +29,20 @@ const Main = () => {
     navigate('/login');
   };
 
+  const { data, error, refetch } = useFinancialData();
+
   useEffect(() => {
-    if (!accessToken) {
-      alert('로그인 후 이용해주세요.');
-      navigate('/login');
+    if (data) {
+      setFinancialData(data);
     }
-  }, []);
+    if (error) {
+      console.error(`ERROR : ${error.message}`);
+    }
+  }, [data, error]);
+
+  const handleDataUpdate = () => {
+    refetch();
+  };
 
   return (
     <div className="main">
@@ -50,8 +64,15 @@ const Main = () => {
 
       <main className="mainContents">
         <div className=" monthDiv">
-          <h1 className="monthTitle">9월</h1>
-          <BiCalendar className="calendarIcon" />
+          <div className="monthDivLeft">
+            <h1 className="monthTitle">9월</h1>
+            <BiCalendar className="calendarIcon" />
+          </div>
+          <div className="dataUpdateButton" onClick={handleDataUpdate}>
+            <p className="updatedAt"></p>
+            <h5 className="updateTitle">업데이트</h5>
+            <BiRefresh className="refreshIcon" />
+          </div>
         </div>
 
         <div
@@ -90,7 +111,7 @@ const Main = () => {
           </div>
         </div>
 
-        {/* 나중에 데이터 통신 성공 시 아래 항목들 ?.map돌릴 것 */}
+        {/* TODO : 나중에 데이터 통신 성공 시 아래 항목들 ?.map돌릴 것 */}
         <div
           className="mySpendings"
           onClick={() => {

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { GROUP_CARD_TABS } from '../../../../utils/constant';
 import { useGetAccounts } from '../../../../hooks/api/group/useGetAccountList';
+import Loading from '../../../../components/Loading/Loading';
 import './GroupAccountList.scss';
 
 const GroupAccountList = () => {
@@ -12,7 +13,7 @@ const GroupAccountList = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(1);
   const navigate = useNavigate();
 
-  const { isLoading, isError, data: accountList } = useGetAccounts();
+  const { isLoading, data: accountList } = useGetAccounts();
 
   const handleTabClick = id => {
     setActiveTabIndex(id);
@@ -21,6 +22,8 @@ const GroupAccountList = () => {
   const totalRest = accountList
     ? accountList.reduce((sum, account) => sum + Number(account.price), 0)
     : 0;
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="groupAccountListContainer">

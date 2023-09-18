@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { AiOutlineClose } from 'react-icons/ai';
 import axios from 'axios';
 import DefaultButton from '../../../../components/DefaultButton/DefaultButton';
+import Loading from '../../../../components/Loading/Loading';
 import { useGetCardsAndAccounts } from '../../../../hooks/api/group/useGetAccountAndCardList';
 import './AddAccount.scss';
-import { useNavigate } from 'react-router-dom';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -16,11 +17,7 @@ const AddAccount = () => {
   const numCardChecked = checkedCardList.length;
   const numAccountChecked = checkedAccountList.length;
 
-  const {
-    isLoading,
-    data: accountsAndCardsData,
-    isError,
-  } = useGetCardsAndAccounts();
+  const { isLoading, data: accountsAndCardsData } = useGetCardsAndAccounts();
 
   const handleCardsAllCheck = ({ target: { checked } }) => {
     if (checked) {
@@ -89,8 +86,7 @@ const AddAccount = () => {
 
   const mutation = useMutation(sendSelectedItems);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error...</div>;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="addAccountContainer">
