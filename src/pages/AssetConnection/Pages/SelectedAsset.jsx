@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useSelectedAccount } from '../../../hooks/api/userAccount/useSelectedAccount';
 import { BiArrowBack } from 'react-icons/bi';
+import { useSelectedAccount } from '../../../hooks/api/userAccount/useSelectedAccount';
+import Loading from '../../../components/Loading/Loading';
 import useSaveSelectedAsset from '../../../hooks/api/userAccount/useSaveSelectedAsset';
 import DefaultButton from '../../../components/DefaultButton/DefaultButton';
 import './SelectedAsset.scss';
@@ -21,10 +22,11 @@ const SelectedAsset = () => {
   const mutation = useSaveSelectedAsset();
 
   const handlePostSelectedList = () => {
-    mutation.mutate(selectedList);
+    // mutation.mutate(selectedList);
+    mutation.mutate({ data: selectedList });
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
   if (error) {
     console.log(error);
   }

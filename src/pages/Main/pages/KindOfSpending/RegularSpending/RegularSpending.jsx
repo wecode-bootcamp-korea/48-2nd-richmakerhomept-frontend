@@ -4,9 +4,9 @@ import { BiArrowBack, BiPlus } from 'react-icons/bi';
 import { GrFormDown } from 'react-icons/gr';
 import { TEMPORARY_DATA } from '../../../../../utils/constant';
 import CalendarModal from '../../../../../components/CalendarModal/CalendarModal';
-import './FloatingSpending.scss';
+import './RegularSpending.scss';
 
-const FloatingSpending = () => {
+const RegularSpending = () => {
   const navigate = useNavigate();
 
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
@@ -36,7 +36,7 @@ const FloatingSpending = () => {
   };
 
   return (
-    <div className="floatingSpending">
+    <div className="regularSpending">
       <header className="detailHeader">
         <BiArrowBack
           className="headerIcon"
@@ -51,15 +51,15 @@ const FloatingSpending = () => {
       </header>
 
       <main className="mainContents">
-        <section className="floatingSpendingSummary">
-          <p className="title">총 변동지출</p>
+        <section className="regularSpendingSummary">
+          <p className="title">총 정기지출</p>
           <h3 className="amount">
-            <span>591,110</span>원
+            <span>600,000</span>원
           </h3>
           <p className="scheduled">지출 예정 0원</p>
         </section>
 
-        <section className="floatingSpendingBreakdownSection">
+        <section className="regularSpendingBreakdownSection">
           <div className="categories">
             <button
               className={`categoryButton ${dateClick ? 'bold' : ''}`}
@@ -74,7 +74,7 @@ const FloatingSpending = () => {
               카테고리
             </button>
           </div>
-          <div className="floatingSpendingBreakdown">
+          <div className="regularSpendingBreakdown">
             {TEMPORARY_DATA.map((data, i) => (
               <div key={i} className="breakdownByCategory">
                 <div className="dateAndAmount">
@@ -112,4 +112,4 @@ const FloatingSpending = () => {
   );
 };
 
-export default FloatingSpending;
+export default RegularSpending;

@@ -14,6 +14,7 @@ import GroupManagement from './pages/GroupManagement/GroupManagement';
 import MyReport from './pages/Main/pages/MyReport/MyReport';
 import IncomeDetail from './pages/Main/pages/IncomeDetail/IncomeDetail';
 import SpendingDetail from './pages/Main/pages/SpendingDetail/SpendingDetail';
+import RegularSpending from './pages/Main/pages/KindOfSpending/RegularSpending/RegularSpending';
 import FloatingSpending from './pages/Main/pages/KindOfSpending/FloatingSpending/FloatingSpending';
 import GroupUserList from './pages/GroupManagement/pages/GroupUserList/GroupUserList';
 import GroupAccountList from './pages/GroupManagement/pages/GroupAccountList/GroupAccountList';
@@ -66,6 +67,15 @@ const Router = () => {
           element={
             <>
               <SpendingDetail />
+              <Navbar />
+            </>
+          }
+        />
+        <Route
+          path="/main/regular-spending"
+          element={
+            <>
+              <RegularSpending />
               <Navbar />
             </>
           }

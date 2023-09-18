@@ -1,11 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BiArrowBack, BiPlus } from 'react-icons/bi';
 import { GrFormDown } from 'react-icons/gr';
+import { useSpendingData } from '../../../../hooks/api/breakdown/useSpendingData';
+import Loading from '../../../../components/Loading/Loading';
+import CalendarModal from '../../../../components/CalendarModal/CalendarModal';
 import './SpendingDetail.scss';
+
+const baseUrl = process.env.REACT_APP_BASE_URL;
+const accessToken = localStorage.getItem('accessToken');
 
 const SpendingDetail = () => {
   const navigate = useNavigate();
+
+  const [formattedData, setFormattedData] = useState([]);
+  const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+
+  const { spendingData, isError, isLoading, error } = useSpendingData(
+    baseUrl,
+    accessToken,
+    month,
+  );
+  // TODO : 통신 테스트 후 지우자.
+  console.log(spendingData);
+
+  const handleOpenCalendar = () => {
+    setIsOpenCalendar(true);
+  };
+  const handleCloseCalendar = () => {
+    setIsOpenCalendar(false);
+  };
+
+  const handleDateSelect = date => {
+    const selectedMonth = parseInt(date.split('년')[1].trim(), 10);
+    setMonth(selectedMonth);
+    handleCloseCalendar();
+  };
+
+  // const transformData = data => {
+  //   const resultMap = new Map();
+
+  //   data.forEach(item => {
+  //     const { transactionDay, transactionNote, amount, imageUrl, financeNumber } =
+  //       item;
+
+  //     const breakdownItem = { transactionNote, amount, imageUrl, financeNumber };
+
+  //     if (resultMap.has(transactionDay)) {
+  //       resultMap.get(transactionDay).breakDown.push(breakdownItem);
+  //     } else {
+  //       resultMap.set(transactionDay, {
+  //         transactionDay,
+  //         breakDown: [breakdownItem],
+  //       });
+  //     }
+  //   });
+
+  //   return Array.from(resultMap.values());
+  // };
+
+  // console.log(transformData(spendingData));
+
+  // useEffect(()=>{
+  //   setFormattedData(transformData(spendingData))
+  // },[spendingData])
+
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
+  // if (isError) {
+  //   console.log(error);
+  // }
 
   return (
     <div className="spendingDetail">
@@ -16,8 +82,8 @@ const SpendingDetail = () => {
             navigate(-1);
           }}
         />
-        <div className="headerDate">
-          2023년 9월 <GrFormDown />
+        <div className="headerDate" onClick={handleOpenCalendar}>
+          2023년 {month}월 <GrFormDown />
         </div>
         <BiPlus className="headerIcon" />
       </header>
@@ -124,6 +190,12 @@ const SpendingDetail = () => {
           {/* 여기까지 */}
         </section>
       </main>
+      {isOpenCalendar && (
+        <CalendarModal
+          closeModal={handleCloseCalendar}
+          onDateSelect={handleDateSelect}
+        />
+      )}
     </div>
   );
 };

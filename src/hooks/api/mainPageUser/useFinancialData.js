@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchFinancialData } from './mainAPI';
 
-const useFinancialData = () => {
+const useFinancialData = month => {
   return useQuery({
-    queryFn: fetchFinancialData,
-    queryKey: ['financialData'],
+    queryFn: () => fetchFinancialData(month),
+    queryKey: ['financialData', month],
     staleTime: 1000 * 60 * 10,
   });
 };
