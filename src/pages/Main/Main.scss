@@ -49,24 +49,61 @@
 
     .monthDiv {
       width: 100%;
-      padding: 10px 0;
+      padding: 15px 0 5px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
 
-      .monthTitle {
-        font-size: 25px;
-        font-weight: 900;
-        margin: 0 3px;
+      .monthDivLeft {
+        display: flex;
         cursor: pointer;
+        .monthTitle {
+          font-size: 25px;
+          font-weight: 900;
+          margin: 0 3px;
+        }
+
+        .calendarIcon {
+          font-size: 25px;
+          padding: 3px;
+          margin-left: 3px;
+          border: 1px solid $grey80;
+          border-radius: 50%;
+        }
       }
 
-      .calendarIcon {
-        font-size: 25px;
-        padding: 3px;
-        margin-left: 3px;
+      .dataUpdateButton {
+        display: flex;
+        align-items: center;
         cursor: pointer;
-        border: 1px solid $grey80;
-        border-radius: 50%;
+
+        &:hover {
+          .updateTitle {
+            font-size: 16px;
+          }
+
+          .refreshIcon {
+            transform: rotate(720deg);
+            color: #ffffff;
+            background-color: $purple;
+          }
+        }
+
+        .updateTitle {
+          color: $purple;
+          font-weight: 600;
+          font-size: 15px;
+          transition: all 0.9s ease;
+        }
+
+        .refreshIcon {
+          font-size: 25px;
+          padding: 3px;
+          margin-left: 3px;
+          border: 1px solid $grey80;
+          border-radius: 50%;
+          transition: transform 0.9s ease;
+        }
       }
     }
 
