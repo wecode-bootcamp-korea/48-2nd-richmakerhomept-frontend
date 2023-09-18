@@ -22,6 +22,7 @@ const Join = () => {
     password: '',
     CI: '',
   });
+  console.log(userInfo);
 
   const [passwordCheck, setPasswordCheck] = useState('');
 

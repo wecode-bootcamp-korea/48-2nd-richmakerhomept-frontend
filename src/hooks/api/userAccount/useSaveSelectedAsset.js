@@ -1,13 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const accessToken = localStorage.getItem('accessToken');
 
 const saveSelectedAsset = async list => {
   try {
     const response = await axios.post(
-      'http://10.58.52.160:3000/providers/transactions',
+      'http://10.58.52.186:3000/providers/transactions',
       list,
       {
         headers: {
@@ -31,6 +31,11 @@ const useSaveSelectedAsset = () => {
       if (data && data.message === 'SUCCESS CREATED') {
         alert('계좌 연결에 성공했습니다.');
         navigate('/main');
+      } else if (data && data.message === 'NO_RECORDS') {
+        alert(`계좌 연결에 실패했습니다. Error : ${data.message}`);
+      } else {
+        alert('console 확인 요망');
+        console.log(data);
       }
     },
   });

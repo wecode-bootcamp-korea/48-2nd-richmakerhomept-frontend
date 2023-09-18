@@ -47,16 +47,35 @@
     width: 100%;
     padding-bottom: 25%;
 
+    &.noData {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .recommendationMessage {
+        font-size: 23px;
+      }
+
+      .arrowDown {
+        width: 100px;
+        height: 100px;
+        color: $purple;
+      }
+    }
+
     .monthDiv {
       width: 100%;
       padding: 15px 0 5px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      cursor: default;
 
       .monthDivLeft {
         display: flex;
-        cursor: pointer;
+
         .monthTitle {
           font-size: 25px;
           font-weight: 900;
@@ -69,6 +88,7 @@
           margin-left: 3px;
           border: 1px solid $grey80;
           border-radius: 50%;
+          cursor: pointer;
         }
       }
 

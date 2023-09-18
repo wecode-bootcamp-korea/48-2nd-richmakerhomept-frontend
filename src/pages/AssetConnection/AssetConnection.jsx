@@ -39,7 +39,7 @@ const AssetConnection = () => {
     );
   };
 
-  const { data, isError, isLoading } = useAccountData();
+  const { data, isError, isLoading, error } = useAccountData();
 
   useEffect(() => {
     if (data) {
