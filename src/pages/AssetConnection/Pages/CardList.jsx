@@ -6,10 +6,10 @@ const CardList = ({ data, type, onItemSelect, selectedItems }) => {
       {data.map((elem, i) => (
         <div
           className={`assetItem ${
-            selectedItems.includes(elem.providerId) ? 'selected' : ''
+            selectedItems.includes(elem.providerID) ? 'selected' : ''
           }`}
           key={i}
-          onClick={() => onItemSelect(type, elem.providerId)}
+          onClick={() => onItemSelect(type, elem.providerID)}
         >
           <img className="assetImage" src={elem.URL} alt={elem.name} />
           <p className="assetName">{elem.name}</p>

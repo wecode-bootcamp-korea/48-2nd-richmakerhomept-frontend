@@ -47,6 +47,11 @@
         padding: 20px 0;
         border-bottom: 1px solid $grey22;
 
+        .bankImage {
+          width: 50px;
+          margin-right: 10px;
+        }
+
         h3 {
           columns: #444444;
           font-weight: 900;

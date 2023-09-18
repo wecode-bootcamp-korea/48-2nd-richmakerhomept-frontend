@@ -54,7 +54,7 @@ const Join = () => {
     navigate('/login');
   };
   const onErrorSignupCallback = error => {
-    console.log(`onErrorSignupCallback_ERROR : ${error.message}`);
+    console.log(`콜백 ERROR : ${error.message}`);
   };
   const signupMutation = useSignupMutation(
     onSuccessSignupCallback,

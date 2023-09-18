@@ -16,21 +16,19 @@ const AssetConnection = () => {
   const [bankClick, setBankClick] = useState(false);
   const [selectedCards, setSelectedCards] = useState([]);
   const [selectedBanks, setSelectedBanks] = useState([]);
-  console.log(selectedCards);
-  console.log(selectedBanks);
 
-  const handleItemClick = (type, providerId) => {
+  const handleItemClick = (type, providerID) => {
     if (type === 'card') {
       setSelectedCards(prev =>
-        prev.includes(providerId)
-          ? prev.filter(item => item !== providerId)
-          : [...prev, providerId],
+        prev.includes(providerID)
+          ? prev.filter(item => item !== providerID)
+          : [...prev, providerID],
       );
     } else if (type === 'bank') {
       setSelectedBanks(prev =>
-        prev.includes(providerId)
-          ? prev.filter(item => item !== providerId)
-          : [...prev, providerId],
+        prev.includes(providerID)
+          ? prev.filter(item => item !== providerID)
+          : [...prev, providerID],
       );
     }
   };
@@ -45,13 +43,12 @@ const AssetConnection = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       setMyBanks(data.bank);
       setMyCards(data.card);
     } else if (isError) {
-      console.error('데이터 통신 실패');
+      console.error(`데이터 통신 실패 : (${error.message})`);
     } else {
-      console.log('통신 실패');
+      console.log('통신 재시도 중');
     }
   }, [data, isError]);
 

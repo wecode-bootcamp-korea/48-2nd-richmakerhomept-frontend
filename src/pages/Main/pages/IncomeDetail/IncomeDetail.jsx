@@ -1,11 +1,109 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BiArrowBack, BiPlus } from 'react-icons/bi';
 import { GrFormDown } from 'react-icons/gr';
 import './IncomeDetail.scss';
 
+/** 받아오는 데이터가 이중array가 아닐 경우엔  주석처리된 함수 사용해야 함. */
+// const transformData = data => {
+//   const resultMap = new Map();
+
+//   data.forEach(item => {
+//     const { transactionDay, transactionNote, amount, imageUrl, financeNumber } =
+//       item;
+
+//     const breakdownItem = { transactionNote, amount, imageUrl, financeNumber };
+
+//     if (resultMap.has(transactionDay)) {
+//       resultMap.get(transactionDay).breakDown.push(breakdownItem);
+//     } else {
+//       resultMap.set(transactionDay, {
+//         transactionDay,
+//         breakDown: [breakdownItem],
+//       });
+//     }
+//   });
+
+//   return Array.from(resultMap.values());
+// };
+
+// const newData = [
+//   {
+//     transactionDay: '1',
+//     transactionNote: '이디야',
+//     amount: '12,000',
+//     imageUrl:
+//       'https://dagh2xqzh7jgv.cloudfront.net/category/subScription_2.png',
+//     financeNumber: '003-3883-8989-22',
+//   },
+//   {
+//     transactionDay: '1',
+//     transactionNote: '스타벅스',
+//     amount: '17,000',
+//     imageUrl:
+//       'https://dagh2xqzh7jgv.cloudfront.net/category/subScription_2.png',
+//     financeNumber: '003-3883-8989-22',
+//   },
+//   {
+//     transactionDay: '2',
+//     transactionNote: '홈플러스',
+//     amount: '12,000',
+//     imageUrl:
+//       'https://dagh2xqzh7jgv.cloudfront.net/category/subScription_2.png',
+//     financeNumber: '003-3883-8989-22',
+//   },
+//   {
+//     transactionDay: '3',
+//     transactionNote: 'gs24',
+//     amount: '33,000',
+//     imageUrl:
+//       'https://dagh2xqzh7jgv.cloudfront.net/category/subScription_2.png',
+//     financeNumber: '003-3883-8989-22',
+//   },
+//   {
+//     transactionDay: '3',
+//     transactionNote: '위코드',
+//     amount: '120,000',
+//     imageUrl:
+//       'https://dagh2xqzh7jgv.cloudfront.net/category/subScription_2.png',
+//     financeNumber: '003-3883-8989-22',
+//   },
+//   {
+//     transactionDay: '3',
+//     transactionNote: '위워크',
+//     amount: '127,000',
+//     imageUrl:
+//       'https://dagh2xqzh7jgv.cloudfront.net/category/subScription_2.png',
+//     financeNumber: '003-3883-8989-22',
+//   },
+// ];
+
+// console.log(transformData(newData));
+/*여기까지*/
+
+const baseUrl = process.env.REACT_APP_BASE_URL;
+const accessToken = localStorage.getItem('accessToken');
+
 const IncomeDetail = () => {
   const navigate = useNavigate();
+
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
+  const [incomes, setIncomes] = useState();
+
+  useEffect(() => {
+    fetch(`${baseUrl}/transactions/deposits`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `${accessToken}`,
+      },
+      body: JSON.stringify({
+        monthValue: currentMonth,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => setIncomes(data.data));
+  }, []);
 
   return (
     <div className="incomeDetail">
