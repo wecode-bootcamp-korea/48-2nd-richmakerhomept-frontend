@@ -6,6 +6,8 @@ import Loading from '../../../../components/Loading/Loading';
 import GroupUser from './components/GroupUser';
 import './GroupUserList.scss';
 
+const id = localStorage.getItem('id');
+
 const GroupUserList = () => {
   const navigate = useNavigate();
 
@@ -28,10 +30,11 @@ const GroupUserList = () => {
           <GroupUser
             key={el.userId}
             profileImage={el.profileImage}
+            userId={el.userId}
             userName={el.userName}
-            sharedCount={el.sharedCount}
-            hideDeleteButton={el.userId === 1}
-            who={el.userId === 1 ? 'ME' : 'YOU'}
+            sharedCount={el.sharedFinanceCount}
+            hideDeleteButton={el.userId === parseInt(id)}
+            who={el.userId === parseInt(id) ? 'ME' : 'YOU'}
           />
         ))}
       </div>

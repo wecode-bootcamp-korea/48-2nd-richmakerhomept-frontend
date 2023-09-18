@@ -91,22 +91,19 @@ const Router = () => {
         />
         <Route path="/add-user" element={<AddUser />} />
         <Route path="/my-page" element={<MyPage />} />
-        <Route
-          path="/group"
-          element={
-            <>
-              <GroupManagement />
-              <Navbar />
-            </>
-          }
-        />
+        <Route path="/group" element={<GroupManagement />} />
         <Route path="/group/group-user" element={<GroupUserList />} />
         <Route path="/group/account" element={<GroupAccountList />} />
         <Route path="/group/card" element={<GroupCardList />} />
+        <Route
+          path="/group/finance/detail/account"
+          element={<AccountDetail />}
+        />
+        <Route path="/group/finance/detail/card" element={<CardDetail />} />
+
         <Route path="/group/add-account" element={<AddAccount />} />
         <Route path="/group/use" element={<GroupTotalPriceDetail />} />
-        <Route path="/group/account/:accountId" element={<AccountDetail />} />
-        <Route path="/group/card/:id" element={<CardDetail />} />
+        {/* <Route path="/group/account/:accountId" element={<AccountDetail />} /> */}
         <Route path="/main/my-report/chart" element={<Chart />} />
       </Routes>
     </BrowserRouter>

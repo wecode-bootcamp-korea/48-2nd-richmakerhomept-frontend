@@ -1,25 +1,76 @@
 {
-  "data": [
-    {
-      "accountId": 1,
-      "profileImage": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M",
-      "accountImage": "https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/busanBank_PNG.png",
-      "accountName": "부산은행 계좌",
-      "rest": "2200"
-    },
-    {
-      "accountId": 2,
-      "profileImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
-      "accountImage": "https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/busanBank_PNG.png",
-      "accountName": "부산은행 계좌",
-      "rest": "2500"
-    },
-    {
-      "accountId": 3,
-      "profileImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
-      "accountImage": "https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/busanBank_PNG.png",
-      "accountName": "부산은행 계좌",
-      "rest": "2500"
-    }
-  ]
+  "data": {
+    "members": [
+      {
+        "userId": 7,
+        "userName": "최판호"
+      },
+      {
+        "userId": 9,
+        "userName": "최준호"
+      },
+      {
+        "userId": 10,
+        "userName": "최연희"
+      }
+    ],
+    "info": [
+      {
+        "providerName": "bc카드",
+        "providerImage": "https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/bcCard_PNG.png",
+        "total": "-2.00",
+        "finances": [
+          {
+            "sum": -2,
+            "userId": 9,
+            "financeId": 9,
+            "userProfile": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxM[…]x8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
+            "financeNumber": "111-1234-1122-11"
+          }
+        ]
+      },
+      {
+        "providerName": "롯데카드",
+        "providerImage": "https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/lotteCard_PNG.png",
+        "total": "-300.00",
+        "finances": [
+          {
+            "sum": -100,
+            "userId": 7,
+            "financeId": 21,
+            "userProfile": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxM[…]x8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
+            "financeNumber": "661-3233-4222-41"
+          },
+          {
+            "sum": -200,
+            "userId": 10,
+            "financeId": 22,
+            "userProfile": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxM[…]x8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
+            "financeNumber": "441-4747-4466-41"
+          }
+        ]
+      },
+      {
+        "providerName": "현대카드",
+        "providerImage": "https://dagh2xqzh7jgv.cloudfront.net/cardbanklogo/hyundaiBank_PNG.png",
+        "total": "-12.00",
+        "finances": [
+          {
+            "sum": -2,
+            "userId": 7,
+            "financeId": 19,
+            "userProfile": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxM[…]x8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
+            "financeNumber": "661-3233-4222-44"
+          },
+          {
+            "sum": -10,
+            "userId": 7,
+            "financeId": 20,
+            "userProfile": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxM[…]x8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=60",
+            "financeNumber": "441-4747-4466-44"
+          }
+        ]
+      }
+    ]
+  }
 }

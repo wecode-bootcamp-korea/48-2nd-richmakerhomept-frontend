@@ -4,6 +4,7 @@ import { useDeleteGroupUser } from '../../../../../hooks/api/useDeleteGroupUser'
 import './GroupUser.scss';
 
 const GroupUser = ({
+  userId,
   userName,
   hideDeleteButton,
   profileImage,
@@ -21,7 +22,7 @@ const GroupUser = ({
             <ImBin2
               size={15}
               className="deleteButton"
-              onClick={id => deleteUser.mutate(id)}
+              onClick={() => deleteUser.mutate(userId)}
             />
           )}
         </div>

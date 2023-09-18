@@ -5,6 +5,6 @@ export const useSelectedAccount = (banks, cards) => {
   return useQuery({
     queryFn: () => fetchSelectedAccount(banks, cards),
     queryKey: ['accountData', banks, cards],
-    enabled: !!banks && !!cards,
+    enabled: !!banks || !!cards,
   });
 };

@@ -1,11 +1,22 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
+import { useGetGroupAssetDetail } from '../../../../hooks/api/group/useGetDetail';
+import Loading from '../../../../components/Loading/Loading';
+import { formatPrice } from '../../../../utils/constant';
 import './AccountDetail.scss';
 
 const AccountDetail = () => {
   const navigate = useNavigate();
-  const { accountId } = useParams();
+  const [searchParams] = useSearchParams();
+
+  const financeId = searchParams.get('financeId');
+
+  const { isLoading, data: detail } = useGetGroupAssetDetail(financeId);
+
+  if (isLoading) return <Loading />;
+
+  const groupedData = groupTransactionsByMonth(detail.transactions);
 
   return (
     <div className="accountDetailContainer">
@@ -23,49 +34,60 @@ const AccountDetail = () => {
       <div className="accountDetailInfo">
         <div className="header">
           <img
-            src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ7Jm92YqMxbfwC4Aez6Yc85ZODI5uaHR3KxUZnUlRtKSjBju2M"
+            src={detail.commonInfo.providerImage}
             alt="카드"
-            className="cardImage"
+            className="accountImage"
           />
-          <p className="title">잇(it)딴주머니통장</p>
+          <p className="title">{detail.commonInfo.provider}</p>
         </div>
         <div className="summaryInfo">
-          <p className="accountNumber">1020301230</p>
+          <p className="accountNumber">{detail.commonInfo.financeNumber}</p>
           <div className="priceBox">
-            <p className="price">544원</p>
-            <span className="priceInfo">(출금가능액 : 544원)</span>
+            <p className="price">{formatPrice(Number(detail.totalAmount))}원</p>
+            <span className="priceInfo">
+              (출금가능액 : {formatPrice(Number(detail.totalAmount))}원)
+            </span>
           </div>
         </div>
       </div>
 
-      <div className="accountDetailContainer">
-        <p className="title">23년 9월</p>
-        <div className="accountDetailContent">
-          <div className="header">
-            <p>23/09/14 12:15</p>
-            <p>체크카드결</p>
-          </div>
-          <div className="body">
-            <p>바나프레소 역삼대로</p>
-            <p>-3,300원</p>
-          </div>
-          <p className="rest">1,144,638원</p>
+      {Object.keys(groupedData).map((month, index) => (
+        <div className="accountDetailContainer" key={index}>
+          <p className="title">{month}</p>
+          {groupedData[month].map((transaction, i) => (
+            <div className="accountDetailContent" key={i}>
+              <div className="header">
+                <p>
+                  {transaction.tYear}/{transaction.tMonth}/{transaction.tDay}
+                </p>
+                <p>체크카드결</p>
+              </div>
+              <div className="body">
+                <p>{transaction.note}</p>
+                <p>{formatPrice(Number(transaction.amount))}원</p>
+              </div>
+            </div>
+          ))}
         </div>
-
-        <div className="accountDetailContent">
-          <div className="header">
-            <p>23/09/14 12:15</p>
-            <p>체크카드결</p>
-          </div>
-          <div className="body">
-            <p>바나프레소 역삼대로</p>
-            <p>-3,300원</p>
-          </div>
-          <p className="rest">1,144,638원</p>
-        </div>
-      </div>
+      ))}
     </div>
   );
+};
+
+const groupTransactionsByMonth = transactions => {
+  const groupedData = {};
+
+  transactions.forEach(transaction => {
+    const monthKey = `${transaction.tYear}년 ${transaction.tMonth}월`;
+
+    if (!groupedData[monthKey]) {
+      groupedData[monthKey] = [];
+    }
+
+    groupedData[monthKey].push(transaction);
+  });
+
+  return groupedData;
 };
 
 export default AccountDetail;

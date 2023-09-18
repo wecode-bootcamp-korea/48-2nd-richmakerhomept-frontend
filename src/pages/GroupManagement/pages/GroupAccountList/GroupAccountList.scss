@@ -94,36 +94,60 @@
       flex-direction: column;
       padding-top: 24px;
 
-      .accountList {
-        position: relative;
+      .accountItemBox {
         width: 90%;
-        display: grid;
-        align-items: center;
-        grid-template-columns: 10fr 1fr;
-        padding-left: 13%;
-        margin: 0 auto 10%;
-        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto 20px;
 
-        .account {
-          position: absolute;
-          width: 100px;
-          clip: rect(0, 38px, 50px, 0);
-        }
-
-        .accountTitleBox {
+        .accontTitleHeader {
           display: flex;
-          flex-direction: column;
-          gap: 5px;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px 0;
+          font-size: 14px;
 
           .price {
-            font-weight: bold;
+            font-size: 18px;
           }
         }
 
-        .profile {
-          width: 25px;
-          height: 25px;
-          border-radius: 50%;
+        .accountList {
+          position: relative;
+          width: 90%;
+          display: grid;
+          align-items: center;
+          grid-template-columns: 10fr 1fr;
+          padding-left: 13%;
+          margin: 0 auto 10%;
+          font-size: 15px;
+
+          .accountImage {
+            position: absolute;
+            width: 30px;
+            // height: auto;
+            // clip: rect(0, 38px, 50px, 0);
+          }
+
+          .accountTitleBox {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            .accountNumber {
+              font-size: 14px;
+            }
+
+            .price {
+              font-weight: bold;
+            }
+          }
+
+          .profile {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+          }
         }
       }
     }

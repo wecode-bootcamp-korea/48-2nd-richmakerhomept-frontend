@@ -148,3 +148,6 @@ export const GROUP_CARD_TABS = [
 /** 날짜 포맷 (2023년 9월) */
 export const formatDate =
   new Date().getFullYear() + '년 ' + (new Date().getMonth() + 1) + '월';
+
+/** 가격 3자리 끊기 */
+export const formatPrice = price => price.toLocaleString();

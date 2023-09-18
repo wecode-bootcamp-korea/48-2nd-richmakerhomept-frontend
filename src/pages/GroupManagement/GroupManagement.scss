@@ -1,11 +1,11 @@
 @import '../../styles/variables.scss';
 
 .groupContainer {
-  max-width: 90%;
   width: 100%;
-  margin: 0 auto;
 
   .groupContentContainer {
+    width: 90%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 30px;

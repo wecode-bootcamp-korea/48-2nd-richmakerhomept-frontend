@@ -31,7 +31,7 @@ const SelectedAsset = () => {
     console.log(error);
   }
 
-  const handleCheckbox = item =>
+  const handleCheckbox = item => {
     setSelectedList(prev => {
       if (prev.includes(item)) {
         return prev.filter(existingItem => existingItem !== item);
@@ -39,6 +39,7 @@ const SelectedAsset = () => {
         return [...prev, item];
       }
     });
+  };
 
   return (
     <div className="selectedAsset">

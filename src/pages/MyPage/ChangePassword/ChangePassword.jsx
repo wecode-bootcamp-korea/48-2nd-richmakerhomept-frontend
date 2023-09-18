@@ -41,8 +41,6 @@ const ChangePassword = () => {
         },
       );
 
-      console.log(res, newPassword, newPasswordCheck);
-
       if (res.data.message === 'changePassword') {
         alert('비밀번호가 변경되었습니다.');
         navigate('/main');

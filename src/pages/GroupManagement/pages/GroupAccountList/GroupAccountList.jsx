@@ -1,26 +1,45 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
-import { GROUP_CARD_TABS } from '../../../../utils/constant';
-import { useGetAccounts } from '../../../../hooks/api/group/useGetAccountList';
+import { useGetGroupAssets } from '../../../../hooks/api/group/useGetAccountList';
 import Loading from '../../../../components/Loading/Loading';
+import { formatPrice } from '../../../../utils/constant';
 import './GroupAccountList.scss';
 
 const GroupAccountList = () => {
   // 탭별 화면은 쿼리스트링으로
   // 계좌 내역이 없을 때에도 '표시할 계좌 내역이 없습니다.' 표시
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [activeTabIndex, setActiveTabIndex] = useState(1);
+  const assets = searchParams.get('type');
+  const memberIdParam = searchParams.get('memberId');
+  const memberId = parseInt(memberIdParam);
+
+  const [activeTab, setActiveTab] = useState('공동');
   const navigate = useNavigate();
 
-  const { isLoading, data: accountList } = useGetAccounts();
+  const { isLoading, data: accountList } = useGetGroupAssets(assets, memberId);
 
-  const handleTabClick = id => {
-    setActiveTabIndex(id);
+  console.log(accountList);
+
+  const handleTabClick = (tabName, tabUserId) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    if (tabName === '공동') {
+      setActiveTab('공동');
+      newSearchParams.set('type', assets);
+      newSearchParams.delete('memberId');
+    } else {
+      setActiveTab(tabName);
+      newSearchParams.set('type', assets);
+      newSearchParams.set('memberId', tabUserId);
+    }
+
+    setSearchParams(newSearchParams);
   };
 
   const totalRest = accountList
-    ? accountList.reduce((sum, account) => sum + Number(account.price), 0)
+    ? accountList.info.reduce((sum, account) => sum + Number(account.total), 0)
     : 0;
 
   if (isLoading) return <Loading />;
@@ -32,18 +51,24 @@ const GroupAccountList = () => {
           <BiArrowBack
             size={20}
             className="arrowBack"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/group')}
           />
           <h1 className="title">계좌</h1>
         </div>
         <div className="groupUser">
-          {GROUP_CARD_TABS.map(tab => (
+          <button
+            className={`groupTab ${activeTab === '공동' ? 'bold' : ''}`}
+            onClick={() => handleTabClick('공동')}
+          >
+            공동
+          </button>
+          {accountList?.members.map(tab => (
             <button
-              key={tab.id}
-              className={`groupTab ${activeTabIndex === tab.id ? 'bold' : ''}`}
-              onClick={() => handleTabClick(tab.id)}
+              key={tab.userId}
+              className={`groupTab ${activeTab === tab.userName ? 'bold' : ''}`}
+              onClick={() => handleTabClick(tab.userName, tab.userId)}
             >
-              {tab.label}
+              {tab.userName}
             </button>
           ))}
         </div>
@@ -53,26 +78,41 @@ const GroupAccountList = () => {
           <div className="header">
             <p>잔고 합계</p>
             <p>
-              <b className="price">{totalRest.toLocaleString()}</b>원
+              <b className="price">{formatPrice(totalRest)}</b>원
             </p>
           </div>
           <div className="accountItemContainer">
-            {accountList?.map(account => (
-              <div className="accountList" key={account.accountId}>
-                <img
-                  src={account.accountImage}
-                  alt="카드"
-                  className="account"
-                />
-                <div className="accountTitleBox">
-                  <p>{account.accountName}</p>
-                  <span className="price">{account.price}원</span>
+            {accountList?.info.map((account, i) => (
+              <div className="accountItemBox" key={i}>
+                <div className="accontTitleHeader">
+                  <p>{account.providerName}</p>
+                  <p>
+                    <b className="price">
+                      {formatPrice(Number(account.total))}
+                    </b>
+                    원
+                  </p>
                 </div>
-                <img
-                  src={account.profileImage}
-                  alt="프로필"
-                  className="profile"
-                />
+                {account.finances.map(finance => (
+                  <div className="accountList" key={i}>
+                    <img
+                      src={account.providerImage}
+                      alt="계좌"
+                      className="accountImage"
+                    />
+                    <div className="accountTitleBox">
+                      <p className="accountNumber">{finance.financeNumber}</p>
+                      <span className="price">
+                        {formatPrice(finance.sum)}원
+                      </span>
+                    </div>
+                    <img
+                      src={finance.userProfile}
+                      alt="프로필"
+                      className="profile"
+                    />
+                  </div>
+                ))}
               </div>
             ))}
           </div>
