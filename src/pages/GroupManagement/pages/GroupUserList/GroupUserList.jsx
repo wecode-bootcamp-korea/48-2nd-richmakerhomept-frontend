@@ -2,16 +2,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { useGetGroupUsers } from '../../../../hooks/api/useGetGroupUser';
+import Loading from '../../../../components/Loading/Loading';
 import GroupUser from './components/GroupUser';
 import './GroupUserList.scss';
 
 const GroupUserList = () => {
   const navigate = useNavigate();
 
-  const { isLoading, data: userList, isError } = useGetGroupUsers();
+  const { isLoading, data: userList } = useGetGroupUsers();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error...</div>;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="groupUserListContainer">

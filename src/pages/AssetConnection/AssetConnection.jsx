@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAccountData } from '../../hooks/api/userAccount/useAccountData';
 import { BiArrowBack } from 'react-icons/bi';
-import CardList from './Pages/CardList';
+import { useAccountData } from '../../hooks/api/userAccount/useAccountData';
 import DefaultButton from '../../components/DefaultButton/DefaultButton';
+import Loading from '../../components/Loading/Loading';
+import CardList from './Pages/CardList';
 import './AssetConnection.scss';
 
 const AssetConnection = () => {
@@ -40,7 +41,8 @@ const AssetConnection = () => {
     );
   };
 
-  const { data, isError } = useAccountData();
+  const { data, isError, isLoading } = useAccountData();
+
   useEffect(() => {
     if (data) {
       console.log(data);
@@ -61,6 +63,8 @@ const AssetConnection = () => {
     setCardClick(false);
     setBankClick(true);
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="assetConnection">
