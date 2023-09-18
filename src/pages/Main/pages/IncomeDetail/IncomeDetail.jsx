@@ -73,8 +73,6 @@ const IncomeDetail = () => {
     accessToken,
     month,
   );
-  // TODO : 통신 테스트 후 지우자.
-  console.log(incomeData);
 
   const handleOpenCalendar = () => {
     setIsOpenCalendar(true);

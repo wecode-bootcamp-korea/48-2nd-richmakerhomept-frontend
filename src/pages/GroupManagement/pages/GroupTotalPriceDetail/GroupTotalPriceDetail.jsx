@@ -7,9 +7,6 @@ import CalendarModal from '../../../../components/CalendarModal/CalendarModal';
 import './GroupTotalPriceDetail.scss';
 
 const GroupTotalPriceDetail = () => {
-  // 탭별 화면은 쿼리스트링으로
-  // 계좌 내역이 없을 때에도 '표시할 계좌 내역이 없습니다.' 표시
-
   const [activeTabIndex, setActiveTabIndex] = useState(1);
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(formatDate);

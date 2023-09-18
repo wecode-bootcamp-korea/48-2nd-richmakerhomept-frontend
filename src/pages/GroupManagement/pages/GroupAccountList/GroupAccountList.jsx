@@ -7,8 +7,6 @@ import { formatPrice } from '../../../../utils/constant';
 import './GroupAccountList.scss';
 
 const GroupAccountList = () => {
-  // 탭별 화면은 쿼리스트링으로
-  // 계좌 내역이 없을 때에도 '표시할 계좌 내역이 없습니다.' 표시
   const [searchParams, setSearchParams] = useSearchParams();
 
   const assets = searchParams.get('type');
@@ -19,8 +17,6 @@ const GroupAccountList = () => {
   const navigate = useNavigate();
 
   const { isLoading, data: accountList } = useGetGroupAssets(assets, memberId);
-
-  console.log(accountList);
 
   const handleTabClick = (tabName, tabUserId) => {
     const newSearchParams = new URLSearchParams(searchParams);

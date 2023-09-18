@@ -41,7 +41,7 @@ const GroupManagement = () => {
         <div className="header">
           <div className="profileImages">
             {members?.map(member => {
-              const matchingBank = banks.find(
+              const matchingBank = banks?.find(
                 bank => bank.userId === member.userId,
               );
               const userImage = matchingBank?.userImage || member.userImage;
