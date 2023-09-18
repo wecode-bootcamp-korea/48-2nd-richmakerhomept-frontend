@@ -1,18 +1,37 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
 import CalendarModal from '../../../../components/CalendarModal/CalendarModal';
-import { formatDate } from '../../../../utils/constant';
+import { useGetGroupCardDetail } from '../../../../hooks/api/group/useGetCardDetail';
+import Loading from '../../../../components/Loading/Loading';
+import { formatPrice } from '../../../../utils/constant';
 import './CardDetail.scss';
 
 const CardDetail = () => {
   const navigate = useNavigate();
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(formatDate);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // TODO: (지출액 / 지출목표) * 100 해야함!! 통신할 때!!
+  const financeId = searchParams.get('financeId');
+  const yearValue = searchParams.get('yearValue');
+  const monthValue = searchParams.get('monthValue');
+
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [year] = useState(new Date().getFullYear());
+
   const percentBar = Math.min(25, 100);
+  const monthFormatted = month < 10 ? `0${month}` : month;
+
+  const { data: spendingData, isLoading } = useGetGroupCardDetail(
+    financeId,
+    year,
+    month,
+  );
+
+  useEffect(() => {
+    setSearchParams({ financeId, yearValue, monthValue });
+  }, [setSearchParams, financeId, yearValue, monthValue]);
 
   const handleOpenCalendar = () => {
     setIsOpenCalendar(true);
@@ -21,6 +40,16 @@ const CardDetail = () => {
   const handleCloseCalendar = () => {
     setIsOpenCalendar(false);
   };
+
+  const handleDateSelect = date => {
+    const selectedMonth = parseInt(date.split('년')[1].trim(), 10);
+    setMonth(selectedMonth);
+    handleCloseCalendar();
+  };
+
+  const groupedData = groupTransactionsByDay(spendingData.transactions);
+
+  if (isLoading) return <Loading />;
 
   return (
     <>
@@ -33,16 +62,19 @@ const CardDetail = () => {
               onClick={() => navigate(-1)}
             />
             <h1 className="title" onClick={handleOpenCalendar}>
-              <p>{selectedDate}</p>
+              <p>2023년 {monthFormatted}월</p>
               <IoIosArrowDown size={18} />
             </h1>
           </div>
-
           <div className="contentContainer">
             <div className="contentHeader">
-              <p className="cardName">플러스</p>
-              <p className="accountNumber">4848128989891</p>
-              <p className="price">2,200원</p>
+              <p className="cardName">{spendingData.commonInfo.provider}</p>
+              <p className="accountNumber">
+                {spendingData.commonInfo.financeNumber}
+              </p>
+              <p className="price">
+                {formatPrice(Number(spendingData.totalAmount))}원
+              </p>
             </div>
             <div className="comparison">
               <div className="percentBar" style={{ width: `${percentBar}%` }} />
@@ -50,50 +82,59 @@ const CardDetail = () => {
             </div>
             <div className="priceGoal">
               <p>지출목표</p>
-              <p className="price">52,800원 &gt;</p>
+              <p className="price">
+                {formatPrice(Number(spendingData.totalAmount))}원 &gt;
+              </p>
             </div>
           </div>
         </div>
 
-        {/* TODO: map 돌려야함! */}
-        <div className="cardUsingList">
-          <div className="header">
-            <p>8일</p>
-            <p>2,200원</p>
-          </div>
-          <div className="content">
-            <img
-              src="https://dagh2xqzh7jgv.cloudfront.net/category/subScription_2.png"
-              alt="카테고리"
-              className="category"
-            />
-            <div className="detailContent">
-              <p className="title">(주)이마트24 MV의왕</p>
-              <p>2,200원</p>
+        {Object.keys(groupedData).map((day, index) => (
+          <div className="cardUsingList" key={index}>
+            <div className="header">
+              <p>{day}</p>
+              <p>{formatPrice(Number(spendingData?.transactions.amount))}원</p>
             </div>
+            {groupedData[day].map((transaction, i) => (
+              <div className="content" key={i}>
+                <img
+                  src={spendingData.commonInfo.categoryImage}
+                  alt="카테고리"
+                  className="category"
+                />
+                <div className="detailContent">
+                  <p className="title">{transaction.note}</p>
+                  <p>{formatPrice(Number(transaction.amount))}원</p>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <div className="content">
-            <img
-              src="https://dagh2xqzh7jgv.cloudfront.net/category/subScription_2.png"
-              alt="카테고리"
-              className="category"
-            />
-            <div className="detailContent">
-              <p className="title">(주)이마트24 MV의왕</p>
-              <p>2,200원</p>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
       {isOpenCalendar && (
         <CalendarModal
           closeModal={handleCloseCalendar}
-          onDateSelect={newDate => setSelectedDate(newDate)}
+          onDateSelect={handleDateSelect}
         />
       )}
     </>
   );
+};
+
+const groupTransactionsByDay = transactions => {
+  const groupedData = {};
+
+  transactions.forEach(transaction => {
+    const dayKey = ` ${transaction.tDay}일`;
+
+    if (!groupedData[dayKey]) {
+      groupedData[dayKey] = [];
+    }
+
+    groupedData[dayKey].push(transaction);
+  });
+
+  return groupedData;
 };
 
 export default CardDetail;

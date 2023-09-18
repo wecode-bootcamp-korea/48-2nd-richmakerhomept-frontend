@@ -22,8 +22,6 @@ const SpendingDetail = () => {
     accessToken,
     month,
   );
-  // TODO : 통신 테스트 후 지우자.
-  console.log(spendingData);
 
   const handleOpenCalendar = () => {
     setIsOpenCalendar(true);

@@ -122,16 +122,19 @@
           margin: 0 auto 10%;
           font-size: 15px;
 
-          .card {
+          .cardImage {
             position: absolute;
-            width: 100px;
-            clip: rect(0, 38px, 50px, 0);
+            width: 30px;
           }
 
           .cardTitleBox {
             display: flex;
             flex-direction: column;
             gap: 5px;
+
+            .cardNumber {
+              font-size: 14px;
+            }
 
             .price {
               font-weight: bold;

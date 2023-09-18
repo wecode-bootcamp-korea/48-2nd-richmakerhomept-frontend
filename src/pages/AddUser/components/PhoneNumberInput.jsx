@@ -44,15 +44,15 @@ const PhoneNumberInput = ({ closeModal }) => {
       onSuccess: data => {
         const { message } = data;
         if (message === 'invitation sent and added member') {
-          alert('성공했습니다');
+          alert('공동관리 설정이 완료되었습니다.');
           closeModal();
           navigate('/group');
         } else if (message === 'Exceeds maximum member count: 5') {
           alert('최대 회원 수를 초과');
         } else if (message === 'Phone number not found') {
-          alert('없는 번호입니다');
+          alert('존재하지 않는 번호입니다.');
         } else if (message === 'same group') {
-          alert('같은 그룹입니다.');
+          alert('이미 등록된 그룹입니다.');
         }
       },
       onError: () => {

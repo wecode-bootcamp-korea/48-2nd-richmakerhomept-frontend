@@ -29,7 +29,7 @@ const AddAccount = () => {
     const financeId = [...checkedCardList, ...checkedAccountList];
 
     mutation.mutate({ isAll, financeId });
-    // navigate('/group');
+    navigate('/group');
   };
 
   const mutation = useMutation(async ({ isAll, financeId }) => {
@@ -98,18 +98,7 @@ const AddAccount = () => {
       setCheckedAccountList(prev => [...prev, id]);
     }
 
-    // setCheckedAccountList(prev => {
-    //   if (prev.includes(id)) {
-    //     return prev.filter(existingItem => existingItem !== id);
-    //   } else {
-    //     return [...prev, id];
-    //   }
-    // });
-  };
-
   if (isLoading) return <Loading />;
-
-  // console.log(accountsAndCardsData);
 
   return (
     <div className="addAccountContainer">
@@ -153,14 +142,14 @@ const AddAccount = () => {
                 />
               </div>
               <ul className="detailList">
-                <li key={card.id} className="detailItem">
+                <li key={card.financeId} className="detailItem">
                   <div className="detailTitleBox">
                     <img
-                      src={card.cardImage}
+                      src={card.providerImage}
                       alt="카드"
                       className="detailImage"
                     />
-                    <p className="detailTitle">{card.cardName}</p>
+                    <p className="detailTitle">{card.providerName}</p>
                   </div>
                   <input
                     type="checkbox"
@@ -172,33 +161,36 @@ const AddAccount = () => {
             </>
           ))}
 
-        <div className="detailHeader">
-          <p>은행</p>
-          <input
-            type="checkbox"
-            onChange={handleAccountsAllCheck}
-            checked={numAccountChecked === banks?.length}
-          />
-        </div>
-        <ul className="detailList">
-          {banks?.map(account => (
-            <li key={account.financeId} className="detailItem">
-              <div className="detailTitleBox">
-                <img
-                  src={account.providerImage}
-                  alt="은행"
-                  className="detailImage"
+        {banks &&
+          banks?.map(account => (
+            <>
+              <div className="detailHeader">
+                <p>은행</p>
+                <input
+                  type="checkbox"
+                  onChange={handleAccountsAllCheck}
+                  checked={numAccountChecked === banks?.length}
                 />
-                <p className="detailTitle">{account.providerName}</p>
               </div>
-              <input
-                type="checkbox"
-                onChange={() => handleAccountOnChange(account.financeId)}
-                checked={checkedAccountList.includes(account.financeId)}
-              />
-            </li>
+              <ul className="detailList">
+                <li key={account.financeId} className="detailItem">
+                  <div className="detailTitleBox">
+                    <img
+                      src={account.providerImage}
+                      alt="은행"
+                      className="detailImage"
+                    />
+                    <p className="detailTitle">{account.providerName}</p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    onChange={() => handleAccountOnChange(account.financeId)}
+                    checked={checkedAccountList.includes(account.financeId)}
+                  />
+                </li>
+              </ul>
+            </>
           ))}
-        </ul>
         <DefaultButton text="공유하기" onClick={handleShare} />
       </div>
     </div>

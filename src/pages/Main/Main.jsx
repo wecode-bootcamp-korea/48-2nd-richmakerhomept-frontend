@@ -19,8 +19,6 @@ const Main = () => {
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [financialData, setFinancialData] = useState([]);
-  /**TODO : 통신 테스트 후 지우자*/
-  console.log(financialData);
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
@@ -120,7 +118,7 @@ const Main = () => {
             <BiCalendar className="calendarIcon" onClick={handleOpenCalendar} />
           </div>
           <div className="dataUpdateButton" onClick={handleDataUpdate}>
-            <p className="updatedAt"></p>
+            <p className="updatedAt" />
             <h5 className="updateTitle">업데이트</h5>
             <BiRefresh className="refreshIcon" />
           </div>
