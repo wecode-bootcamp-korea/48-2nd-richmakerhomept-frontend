@@ -10,7 +10,9 @@ import {
 } from 'react-icons/bi';
 import useFinancialData from '../../hooks/api/mainPageUser/useFinancialData';
 import CalendarModal from '../../components/CalendarModal/CalendarModal';
+import MainPie from './components/MainPie';
 import './Main.scss';
+import { formatPrice } from '../../utils/constant';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -18,7 +20,19 @@ const Main = () => {
   const userName = localStorage.getItem('userName');
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const [month, setMonth] = useState(new Date().getMonth() + 1);
-  const [financialData, setFinancialData] = useState([]);
+  const [financialData, setFinancialData] = useState({
+    amountsBycategories: [],
+    expensesAmountByThreeCategories: [],
+  });
+
+  const {
+    depositsAmount,
+    expensesAmount,
+    expectedExpenseAmounts,
+    monthlyExpenseAmounts,
+    variableExpenseAmounts,
+    amountsBycategories,
+  } = financialData;
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
@@ -41,6 +55,7 @@ const Main = () => {
   };
 
   const { data, error, refetch } = useFinancialData(month);
+  console.log(data);
 
   useEffect(() => {
     if (data) {
@@ -55,44 +70,50 @@ const Main = () => {
     refetch();
   };
 
-  // TODO : 조건문을 data에 등록된 유저계좌가 1개도 없을 때로 바꿔야 함.
-  // if (!data) {
-  //   return (
-  //     <div className="main">
-  //       <header className="mainTopBar">
-  //         <div className="userProfile">
-  //           <BiSolidUserCircle
-  //             className="userProfileImage"
-  //             onClick={() => {
-  //               navigate('/my-page');
-  //             }}
-  //           />
-  //           {userName}님{' '}
-  //           <span className="logoutButton" onClick={handleLogout}>
-  //             로그아웃
-  //           </span>
-  //         </div>
-  //         <BiBell className="bell" />
-  //       </header>
-  //       <main className="mainContents noData">
-  //         <div className="recommendationMessage">
-  //           <h3>계좌/카드 연결하고</h3>
-  //           <h3>자산관리 시작하기</h3>
-  //         </div>
-  //         <AiOutlineCaretDown className="arrowDown" />
-  //         <div
-  //           className="assetConnection"
-  //           onClick={() => {
-  //             navigate('/asset-connection');
-  //           }}
-  //         >
-  //           <p className="buttonTitle">계좌 · 카드 내역 불러오기</p>
-  //           <AiOutlinePlus />
-  //         </div>
-  //       </main>
-  //     </div>
-  //   );
-  // }
+  if (
+    depositsAmount == '0' &&
+    expensesAmount == '0' &&
+    monthlyExpenseAmounts == '0' &&
+    expectedExpenseAmounts == '0' &&
+    variableExpenseAmounts == '0' &&
+    amountsBycategories.length == 0
+  ) {
+    return (
+      <div className="main">
+        <header className="mainTopBar">
+          <div className="userProfile">
+            <BiSolidUserCircle
+              className="userProfileImage"
+              onClick={() => {
+                navigate('/my-page');
+              }}
+            />
+            {userName}님{' '}
+            <span className="logoutButton" onClick={handleLogout}>
+              로그아웃
+            </span>
+          </div>
+          <BiBell className="bell" />
+        </header>
+        <main className="mainContents noData">
+          <div className="recommendationMessage">
+            <h3>계좌/카드 연결하고</h3>
+            <h3>자산관리 시작하기</h3>
+          </div>
+          <AiOutlineCaretDown className="arrowDown" />
+          <div
+            className="assetConnection"
+            onClick={() => {
+              navigate('/asset-connection');
+            }}
+          >
+            <p className="buttonTitle">계좌 · 카드 내역 불러오기</p>
+            <AiOutlinePlus />
+          </div>
+        </main>
+      </div>
+    );
+  }
   return (
     <div className="main">
       <header className="mainTopBar">
@@ -147,7 +168,9 @@ const Main = () => {
             }}
           >
             <h2 className="transactionCategory">총 수입</h2>
-            <h3 className="transactionAmount">3,814,718 원</h3>
+            <h3 className="transactionAmount">
+              {formatPrice(Number(depositsAmount))} 원
+            </h3>
           </div>
           <div
             className="transactionBox spending"
@@ -156,11 +179,12 @@ const Main = () => {
             }}
           >
             <h2 className="transactionCategory">총 지출</h2>
-            <h3 className="transactionAmount">889,920 원</h3>
+            <h3 className="transactionAmount">
+              {formatPrice(Number(expensesAmount) * -1)} 원
+            </h3>
           </div>
         </div>
 
-        {/* TODO : 나중에 데이터 통신 성공 시 아래 항목들 ?.map돌릴 것 */}
         <div
           className="mySpendings"
           onClick={() => {
@@ -171,11 +195,15 @@ const Main = () => {
           <ul className="myList">
             <li className="listItem">
               <span className="listTitle">지출 예정</span>
-              <span className="amount">712,356 원</span>
+              <span className="amount">
+                {formatPrice(Number(expectedExpenseAmounts) * -1)} 원
+              </span>
             </li>
             <li className="listItem">
               <span className="listTitle">지출 완료</span>
-              <span className="amount">78,231 원</span>
+              <span className="amount">
+                {formatPrice(Number(monthlyExpenseAmounts) * -1)} 원
+              </span>
             </li>
           </ul>
         </div>
@@ -193,7 +221,9 @@ const Main = () => {
             </li>
             <li className="listItem">
               <span className="listTitle">지출</span>
-              <span className="amount">322,220 원</span>
+              <span className="amount">
+                {formatPrice(Number(variableExpenseAmounts) * -1)} 원
+              </span>
             </li>
           </ul>
         </div>
@@ -215,22 +245,21 @@ const Main = () => {
             </li>
           </ul>
         </div>
-        {/* 여기까지 */}
+
         <div className="donutChartDiv">
           <h3 className="chartTitle">카테고리별 지출</h3>
-          <div className="donutChart">차트 들어갈 곳.</div>
-          <div className="chartCategory">
-            <p>이체</p>
-            <p>600,000원</p>
+          <div className="donutChart">
+            <MainPie data={amountsBycategories} />
           </div>
-          <div className="chartCategory">
-            <p>해외</p>
-            <p>12,970원</p>
-          </div>
-          <div className="chartCategory">
-            <p>기타</p>
-            <p>121,870원</p>
-          </div>
+          {amountsBycategories.map(
+            ({ id, label, value }, i) =>
+              i < 3 && (
+                <div className="chartCategory" key={id}>
+                  <p>{label}</p>
+                  <p>{formatPrice(Number(value))}원</p>
+                </div>
+              ),
+          )}
         </div>
 
         <div
@@ -240,7 +269,7 @@ const Main = () => {
           }}
         >
           <p className="buttonTitle">계좌 · 카드 내역 불러오기</p>
-          <AiOutlinePlus />
+          <AiOutlinePlus className="assetConnectionPlusIcon" />
         </div>
       </main>
       {isOpenCalendar && (
