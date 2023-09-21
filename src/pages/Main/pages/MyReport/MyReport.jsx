@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { BiArrowBack, BiPlus } from 'react-icons/bi';
 import { GrFormDown, GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import CalendarModal from '../../../../components/CalendarModal/CalendarModal';
-import { useGetMyReport } from '../../../../hooks/api/myreport/useGetMyReport';
 import { formatDate } from '../../../../utils/constant';
 import Chart from '../../components/Chart';
 import './MyReport.scss';
@@ -12,7 +11,68 @@ const MyReport = () => {
   const navigate = useNavigate();
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(formatDate);
-  const [monthData, setMonthData] = useState();
+  const [monthData, setMonthData] = useState([
+    {
+      month: '1월',
+      income: 90,
+      expense: 20,
+    },
+    {
+      month: '2월',
+      income: 90,
+      expense: 70,
+    },
+    {
+      month: '3월',
+      income: 10,
+      expense: 90,
+    },
+    {
+      month: '4월',
+      income: 200,
+      expense: 100,
+    },
+    {
+      month: '5월',
+      income: 30,
+      expense: 90,
+    },
+    {
+      month: '6월',
+      income: 20,
+      expense: 110,
+    },
+    {
+      month: '7월',
+      income: 100,
+      expense: 60,
+    },
+    {
+      month: '8월',
+      income: 380,
+      expense: 10,
+    },
+    {
+      month: '9월',
+      income: 200,
+      expense: 30,
+    },
+    {
+      month: '10월',
+      income: 90,
+      expense: 100,
+    },
+    {
+      month: '11월',
+      income: 490,
+      expense: 130,
+    },
+    {
+      month: '12월',
+      income: 280,
+      expense: 160,
+    },
+  ]);
 
   const [expenseDataRange, setExpenseDataRange] = useState({
     start: 0,
@@ -23,10 +83,6 @@ const MyReport = () => {
     start: 0,
     end: 4,
   });
-
-  const { isLoading, data: myReportData } = useGetMyReport();
-
-  console.log(myReportData);
 
   const isPrevExpenseButtonDisabled = expenseDataRange.start === 0;
   const isNextExpenseButtonDisabled =
@@ -50,10 +106,12 @@ const MyReport = () => {
       const newStart = expenseDataRange.start + 4;
       const newEnd = expenseDataRange.end + 4;
       setExpenseDataRange({ start: newStart, end: newEnd });
+      // TODO: 다음 5달 데이터 가져오는 비동기 로직을 처리
     } else if (direction === 'prev' && !isPrevExpenseButtonDisabled) {
       const newStart = expenseDataRange.start - 4;
       const newEnd = expenseDataRange.end - 4;
       setExpenseDataRange({ start: newStart, end: newEnd });
+      // TODO: 이전 5달 데이터 가져오는 비동기 로직을 처리
     }
   };
 
@@ -62,10 +120,12 @@ const MyReport = () => {
       const newStart = gapDataRange.start + 4;
       const newEnd = gapDataRange.end + 4;
       setGapDataRange({ start: newStart, end: newEnd });
+      // TODO: 다음 5달 데이터 가져오는 비동기 로직을 처리
     } else if (direction === 'prev' && !isPrevGapButtonDisabled) {
       const newStart = gapDataRange.start - 4;
       const newEnd = gapDataRange.end - 4;
       setGapDataRange({ start: newStart, end: newEnd });
+      // TODO: 이전 5달 데이터 가져오는 비동기 로직을 처리
     }
   };
 

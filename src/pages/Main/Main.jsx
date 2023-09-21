@@ -14,6 +14,8 @@ import MainPie from './components/MainPie';
 import './Main.scss';
 import { formatPrice } from '../../utils/constant';
 
+const profileImage = localStorage.getItem('profileImage');
+
 const Main = () => {
   const navigate = useNavigate();
 
@@ -82,12 +84,20 @@ const Main = () => {
       <div className="main">
         <header className="mainTopBar">
           <div className="userProfile">
-            <BiSolidUserCircle
-              className="userProfileImage"
-              onClick={() => {
-                navigate('/my-page');
-              }}
-            />
+            {profileImage === 'null' ? (
+              <BiSolidUserCircle
+                className="userProfileImage"
+                onClick={() => {
+                  navigate('/my-page');
+                }}
+              />
+            ) : (
+              <img
+                src={profileImage}
+                className="userProfileImage"
+                alt="프로필"
+              />
+            )}
             {userName}님{' '}
             <span className="logoutButton" onClick={handleLogout}>
               로그아웃

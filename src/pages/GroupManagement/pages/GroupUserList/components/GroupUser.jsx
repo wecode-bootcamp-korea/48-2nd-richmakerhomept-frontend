@@ -26,7 +26,13 @@ const GroupUser = ({
             />
           )}
         </div>
-        <img src={profileImage} alt="프로필" className="userProfileImage" />
+        <img
+          src={
+            profileImage || 'https://picpac.kr/common/img/default_profile.png'
+          }
+          alt="프로필"
+          className="userProfileImage"
+        />
         <h1>{userName}</h1>
         <span className="count">공유 {sharedCount}건</span>
       </div>
