@@ -50,7 +50,10 @@ const GroupManagement = () => {
                 <img
                   key={member.userId}
                   className="pofileImage positioned"
-                  src={userImage}
+                  src={
+                    userImage ||
+                    'https://picpac.kr/common/img/default_profile.png'
+                  }
                   alt="프로필"
                   onClick={() => navigate('/group/group-user')}
                 />
