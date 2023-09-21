@@ -5,7 +5,6 @@ const accessToken = localStorage.getItem('accessToken');
 
 /** 계좌 연결 초기페이지 모든 카드사 리스트 GET */
 export const fetchAccountData = async () => {
-  // ${baseUrl}/service/account
   const response = await axios.get(`${baseUrl}/providers`, {
     headers: {
       'Content-Type': 'application/json',

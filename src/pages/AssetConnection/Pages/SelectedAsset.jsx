@@ -22,7 +22,6 @@ const SelectedAsset = () => {
   const mutation = useSaveSelectedAsset();
 
   const handlePostSelectedList = () => {
-    // mutation.mutate(selectedList);
     mutation.mutate({ data: selectedList });
   };
 

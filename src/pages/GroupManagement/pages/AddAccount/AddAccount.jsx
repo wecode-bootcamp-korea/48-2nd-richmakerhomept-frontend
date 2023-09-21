@@ -98,103 +98,104 @@ const AddAccount = () => {
       setCheckedAccountList(prev => [...prev, id]);
     }
 
-  if (isLoading) return <Loading />;
+    if (isLoading) return <Loading />;
 
-  return (
-    <div className="addAccountContainer">
-      <div className="header">
-        <div className="closeBtnBox">
-          <AiOutlineClose
-            size={24}
-            className="closeBtn"
-            onClick={() => navigate('/group')}
+    return (
+      <div className="addAccountContainer">
+        <div className="header">
+          <div className="closeBtnBox">
+            <AiOutlineClose
+              size={24}
+              className="closeBtn"
+              onClick={() => navigate('/group')}
+            />
+          </div>
+          <div className="title">
+            <h2>내 공유 데이터 설정</h2>
+            <p>원치 않으시면 선택하지 않으셔도 됩니다.</p>
+          </div>
+        </div>
+
+        <button className="allCheckBtn">
+          <label htmlFor="checkAll">전체 선택</label>
+          <input
+            type="checkbox"
+            id="checkAll"
+            onChange={totalAllCheck}
+            checked={
+              numCardChecked === cards?.length &&
+              numAccountChecked === banks.length
+            }
           />
-        </div>
-        <div className="title">
-          <h2>내 공유 데이터 설정</h2>
-          <p>원치 않으시면 선택하지 않으셔도 됩니다.</p>
-        </div>
-      </div>
+        </button>
 
-      <button className="allCheckBtn">
-        <label htmlFor="checkAll">전체 선택</label>
-        <input
-          type="checkbox"
-          id="checkAll"
-          onChange={totalAllCheck}
-          checked={
-            numCardChecked === cards?.length &&
-            numAccountChecked === banks.length
-          }
-        />
-      </button>
-
-      <div className="detailContainer">
-        {cards &&
-          cards.map(card => (
-            <>
-              <div className="detailHeader">
-                <p>카드</p>
-                <input
-                  type="checkbox"
-                  onChange={handleCardsAllCheck}
-                  checked={numCardChecked === cards?.length}
-                />
-              </div>
-              <ul className="detailList">
-                <li key={card.financeId} className="detailItem">
-                  <div className="detailTitleBox">
-                    <img
-                      src={card.providerImage}
-                      alt="카드"
-                      className="detailImage"
-                    />
-                    <p className="detailTitle">{card.providerName}</p>
-                  </div>
+        <div className="detailContainer">
+          {cards &&
+            cards.map(card => (
+              <>
+                <div className="detailHeader">
+                  <p>카드</p>
                   <input
                     type="checkbox"
-                    onChange={() => handleCardOnChange(card.financeId)}
-                    checked={checkedCardList.includes(card.financeId)}
+                    onChange={handleCardsAllCheck}
+                    checked={numCardChecked === cards?.length}
                   />
-                </li>
-              </ul>
-            </>
-          ))}
-
-        {banks &&
-          banks?.map(account => (
-            <>
-              <div className="detailHeader">
-                <p>은행</p>
-                <input
-                  type="checkbox"
-                  onChange={handleAccountsAllCheck}
-                  checked={numAccountChecked === banks?.length}
-                />
-              </div>
-              <ul className="detailList">
-                <li key={account.financeId} className="detailItem">
-                  <div className="detailTitleBox">
-                    <img
-                      src={account.providerImage}
-                      alt="은행"
-                      className="detailImage"
+                </div>
+                <ul className="detailList">
+                  <li key={card.financeId} className="detailItem">
+                    <div className="detailTitleBox">
+                      <img
+                        src={card.providerImage}
+                        alt="카드"
+                        className="detailImage"
+                      />
+                      <p className="detailTitle">{card.providerName}</p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      onChange={() => handleCardOnChange(card.financeId)}
+                      checked={checkedCardList.includes(card.financeId)}
                     />
-                    <p className="detailTitle">{account.providerName}</p>
-                  </div>
+                  </li>
+                </ul>
+              </>
+            ))}
+
+          {banks &&
+            banks?.map(account => (
+              <>
+                <div className="detailHeader">
+                  <p>은행</p>
                   <input
                     type="checkbox"
-                    onChange={() => handleAccountOnChange(account.financeId)}
-                    checked={checkedAccountList.includes(account.financeId)}
+                    onChange={handleAccountsAllCheck}
+                    checked={numAccountChecked === banks?.length}
                   />
-                </li>
-              </ul>
-            </>
-          ))}
-        <DefaultButton text="공유하기" onClick={handleShare} />
+                </div>
+                <ul className="detailList">
+                  <li key={account.financeId} className="detailItem">
+                    <div className="detailTitleBox">
+                      <img
+                        src={account.providerImage}
+                        alt="은행"
+                        className="detailImage"
+                      />
+                      <p className="detailTitle">{account.providerName}</p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      onChange={() => handleAccountOnChange(account.financeId)}
+                      checked={checkedAccountList.includes(account.financeId)}
+                    />
+                  </li>
+                </ul>
+              </>
+            ))}
+          <DefaultButton text="공유하기" onClick={handleShare} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 };
 
 export default AddAccount;
