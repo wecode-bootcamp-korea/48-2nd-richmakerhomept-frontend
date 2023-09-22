@@ -39,6 +39,11 @@
         font-size: 45px;
         color: lightblue;
         cursor: pointer;
+        &.isNotNull {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+        }
       }
     }
 
