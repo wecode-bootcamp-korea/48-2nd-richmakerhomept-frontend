@@ -85,7 +85,7 @@ const Main = () => {
           <div className="userProfile">
             {profileImage === 'null' ? (
               <BiSolidUserCircle
-                className="userProfileImage"
+                className="userProfileImage "
                 onClick={() => {
                   navigate('/my-page');
                 }}
@@ -93,7 +93,7 @@ const Main = () => {
             ) : (
               <img
                 src={profileImage}
-                className="userProfileImage"
+                className="userProfileImage isNotNull"
                 alt="프로필"
               />
             )}
@@ -213,7 +213,10 @@ const Main = () => {
             <li className="listItem">
               <span className="listTitle">지출 예정</span>
               <span className="amount">
-                {formatPrice(Number(expectedExpenseAmounts) * -1)} 원
+                {Number(expectedExpenseAmounts) > 0
+                  ? formatPrice(Number(expectedExpenseAmounts) * -1)
+                  : 0}{' '}
+                원
               </span>
             </li>
             <li className="listItem">
