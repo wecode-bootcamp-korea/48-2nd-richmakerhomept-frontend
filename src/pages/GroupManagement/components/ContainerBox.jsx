@@ -46,7 +46,10 @@ const ContainerBox = ({ title, count, assets, assetType }) => {
           >
             <img
               className="userPofileImage"
-              src={asset.userImage}
+              src={
+                asset.userImage ||
+                'https://picpac.kr/common/img/default_profile.png'
+              }
               alt="프로필"
             />
             {assetType === 'account' ? (
